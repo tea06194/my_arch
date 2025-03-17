@@ -1,0 +1,12 @@
+[Unit]
+Description=Telegram Desktop
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/telegram-desktop -startintray
+ExecStop=/usr/bin/telegram-desktop -quit
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

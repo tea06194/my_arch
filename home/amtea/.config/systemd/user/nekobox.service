@@ -1,0 +1,12 @@
+[Unit]
+Description=Nekobox
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/nekobox -startintray
+ExecStop=/usr/bin/nekobox -quit
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
