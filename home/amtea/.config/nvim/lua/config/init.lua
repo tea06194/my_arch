@@ -24,6 +24,7 @@ vim.keymap.set('i', '<C-щ>', '<C-o>', opts)
 
 -- STATUSLINE --
 vim.opt.statusline = "%{bufnr()} %<%f %h%m%r%=%-14.(%l,%c%V%) %P"
+vim.opt.showmode = false
 
 -- EDITOR --
 vim.opt.number = true
@@ -109,45 +110,46 @@ vim.diagnostic.config({
 })
 
 --------------------------------------------------------------------------------------------------------------------------------------
-local function wrap_in_tag()
-	local start_row = unpack(vim.api.nvim_buf_get_mark(0, "<"))
-	local end_row = unpack(vim.api.nvim_buf_get_mark(0, ">"))
-
-	local tag = vim.fn.input("Enter tag name: "):match("%S+")
-	if not tag or tag == "" then return end
-
-	local lines = vim.api.nvim_buf_get_lines(0, start_row - 1, end_row, false)
-	print(vim.inspect(lines))
-	if not lines or #lines == 0 then return end
-
-	if #lines == 1 then
-		-- Line
-		local line = lines[1]
-		local trimmed = line:match("^%s*(.-)%s*$")
-		local indent = line:match("^(%s*)") or ""
-		lines[1] = indent .. "<" .. tag .. ">" .. trimmed .. "</" .. tag .. ">"
-	else
-		-- Multiline
-		table.insert(lines, 1, "<" .. tag .. ">")
-		table.insert(lines, "</" .. tag .. ">")
-
-		vim.api.nvim_buf_set_lines(0, start_row - 1, end_row, false, lines)
-
-		vim.cmd(string.format("normal! %dGV%dG=", start_row, end_row + 2))
-		-- vim.lsp.buf.format({
-		--   async = true,
-		--   range = {
-		-- 	["start"] = { start_row, 0 },
-		-- 	["end"] = { end_row + 2, 0 },
-		--   }
-		-- })
-		return
-	end
-
-	vim.api.nvim_buf_set_lines(0, start_row - 1, end_row, false, lines)
-
-	vim.cmd(string.format("normal! %dGV%dG=", start_row, end_row))
-end
-
-vim.api.nvim_create_user_command("WrapInTag", wrap_in_tag, { range = true })
-vim.keymap.set("v", "<leader>w", ":WrapInTag<CR>", opts)
+-- local function wrap_in_tag()
+-- 	local start_row = unpack(vim.api.nvim_buf_get_mark(0, "<"))
+-- 	local end_row = unpack(vim.api.nvim_buf_get_mark(0, ">"))
+--
+-- 	local tag = vim.fn.input("Enter tag name: "):match("%S+")
+-- 	if not tag or tag == "" then return end
+--
+-- 	local lines = vim.api.nvim_buf_get_lines(0, start_row - 1, end_row, false)
+-- 	print(vim.inspect(lines))
+-- 	if not lines or #lines == 0 then return end
+--
+-- 	if #lines == 1 then
+-- 		-- Line
+-- 		local line = lines[1]
+-- 		local trimmed = line:match("^%s*(.-)%s*$")
+-- 		local indent = line:match("^(%s*)") or ""
+-- 		lines[1] = indent .. "<" .. tag .. ">" .. trimmed .. "</" .. tag .. ">"
+-- 	else
+-- 		-- Multiline
+-- 		table.insert(lines, 1, "<" .. tag .. ">")
+-- 		table.insert(lines, "</" .. tag .. ">")
+--
+-- 		vim.api.nvim_buf_set_lines(0, start_row - 1, end_row, false, lines)
+--
+-- 		vim.cmd(string.format("normal! %dGV%dG=", start_row, end_row + 2))
+-- 		-- vim.lsp.buf.format({
+-- 		--   async = true,
+-- 		--   range = {
+-- 		-- 	["start"] = { start_row, 0 },
+-- 		-- 	["end"] = { end_row + 2, 0 },
+-- 		--   }
+-- 		-- })
+-- 		return
+-- 	end
+--
+-- 	vim.api.nvim_buf_set_lines(0, start_row - 1, end_row, false, lines)
+--
+-- 	vim.cmd(string.format("normal! %dGV%dG=", start_row, end_row))
+-- end
+--
+-- vim.api.nvim_create_user_command("WrapInTag", wrap_in_tag, { range = true })
+-- vim.keymap.set("v", "<leader>w", ":WrapInTag<CR>", opts)
+--

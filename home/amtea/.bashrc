@@ -17,6 +17,7 @@ export EDITOR=nvim
 
 alias hyprc='nvim ~/.config/hypr/hyprland.conf'
 alias graph='git log --all --decorate --oneline --graph'
+# alias nvim='/home/amtea/.config/kitty_nvim.sh'
 # HISTCONTROL=ignorespace:erasedups # Не пишем в историю команды с пробелом в начале и дубликаты
 # shopt -s histappend  # Добавление в историю, а не перезапись
 

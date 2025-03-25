@@ -26,6 +26,10 @@ vim.keymap.set('n', '<leader>tt', ':belowright sp | terminal<CR> i', opts)
 -- Open terminal right
 vim.keymap.set('n', '<leader>tv', ':belowright vsp | terminal<CR> i', opts)
 
+-- Open external terminal to wd
+vim.keymap.set('n',	'<leader>xt', function ()
+		vim.fn.system('kitty --directory="' .. vim.fn.getcwd() ..'" &')
+end, opts)
 
 -- To normal from (t)
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', opts)
@@ -55,17 +59,17 @@ function ToggleDiffContext()
   end
 end
 
-vim.keymap.set("n", "<leader>td", ToggleDiff, { desc = "Toggle Diff Mode" })
-vim.keymap.set("n", "<leader>cd", ToggleDiffContext, { desc = "Toggle Diff Context" })
+vim.keymap.set("n", "<leader>diff", ToggleDiff, { desc = "Toggle Diff Mode", table.unpack(opts)})
+vim.keymap.set("n", "<leader>diffc", ToggleDiffContext, { desc = "Toggle Diff Context", table.unpack(opts)})
 
 -- DIAGNOSTIC --
 vim.keymap.set(
 	"n",
-	"<leader>d",
+	"<leader>diag",
 	function()
 		vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 	end,
-	{ desc = "Toggle diagnostic virtual_lines" }
+	{ desc = "Toggle diagnostic virtual_lines", table.unpack(opts) }
 )
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)

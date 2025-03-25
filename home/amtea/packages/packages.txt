@@ -32,6 +32,7 @@ man-db
 nekoray
 neovim
 networkmanager
+noto-fonts-emoji
 numlockx
 nvidia
 nvidia-settings
@@ -51,6 +52,7 @@ slurp
 sudo
 swappy
 telegram-desktop
+tk
 tofi
 ttf-nerd-fonts-symbols
 udisks2
@@ -61,6 +63,8 @@ wget
 wl-clipboard
 xdg-desktop-portal-hyprland
 xorg-xwayland
+yay
+yay-debug
 yazi
 zoom
 zoxide
