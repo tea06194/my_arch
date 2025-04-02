@@ -14,10 +14,15 @@ return {
 					"cssmodules-language-server",
 					"html-lsp",
 					"json-lsp",
+					"typescript-language-server",
+
+					"hyprls",
 					"stylelint",
 					"stylelint-lsp",
-					"typescript-language-server",
-					"hyprls",
+					"eslint-lsp",
+					"eslint_d",
+					"prettier"
+
 				}
 			}
 			--

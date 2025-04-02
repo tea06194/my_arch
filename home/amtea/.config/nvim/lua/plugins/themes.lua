@@ -1,21 +1,14 @@
 return {
-	-- {
-	-- 	"ntk148v/habamax.nvim",
-	-- 	dependencies={ "rktjmp/lush.nvim" },
-	-- 	lazy = false,
-	-- 	config = function()
-	-- 		vim.cmd([[colorscheme gruvbox]])
-	-- 	end,
-	-- },
 	{
 		'sainnhe/sonokai',
 		lazy = false,
 		priority = 1000,
 		config = function()
-			-- Optionally configure and load the colorscheme
-			-- directly inside the plugin declaration.
+			-- vim.g.sonokai_colors_override = {
+			-- 	fg = {'#ff0000', '196'}
+			-- }
 			vim.g.sonokai_enable_italic = true
 			vim.cmd.colorscheme('sonokai')
 		end
-	},
+	}
 }

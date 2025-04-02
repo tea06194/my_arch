@@ -8,6 +8,8 @@ paru
 paru-debug
 sing-geoip-db
 sing-geosite-db
+stomptuner
+stomptuner-debug
 tofi
 v4l2loopback-dc-dkms
 yay

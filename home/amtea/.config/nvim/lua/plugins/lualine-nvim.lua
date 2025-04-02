@@ -2,7 +2,8 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = {
 		'nvim-tree/nvim-web-devicons',
-		'arkav/lualine-lsp-progress'
+		'arkav/lualine-lsp-progress',
+		'tpope/vim-obsession'
 	},
 	config = function ()
 		local colors = {
@@ -18,8 +19,11 @@ return {
 		}
 
 		require('lualine').setup({
+			options = {
+				always_show_tabline = false,
+			},
 			sections = {
-				lualine_x =  {
+				lualine_c =  {
 					{
 						function()
 							local clients = vim.lsp.get_clients({bufnr = vim.api.nvim_get_current_buf()})
@@ -62,18 +66,60 @@ return {
 						timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
 						spinner_symbols = { '🌑 ', '🌒 ', '🌓 ', '🌔 ', '🌕 ', '🌖 ', '🌗 ', '🌘 ' },
 					},
+				},
+				lualine_x = {
 					'filesize',
 					'encoding',
 					'fileformat',
 					'filetype'
 				}
 			},
-			tabline= {
+			inactive_sections = {
+				lualine_c = {}
+			},
+			tabline = {
+				lualine_z = {
+					{
+						"tabs",
+						mode = 1,
+
+					},
+				}
+			},
+			winbar = {
 				lualine_a = {
 					{
 						'filename',
 						path = 3,
-					},
+						shorting_target = 1,
+					}
+				},
+				lualine_z = {
+						{
+							function ()
+								local status = vim.fn.ObsessionStatus()
+
+								return #status == 0 and '[]' or status
+							end,
+							color = function ()
+								local status = vim.fn.ObsessionStatus()
+								local color = { gui = 'bold' }
+
+								if #status == 0 then
+									color.fg = "grey"
+									color.bg = "black"
+								elseif status == "[S]" then
+									color.bg = "grey"
+								end
+
+								return color
+							end
+						}
+					}
+			},
+			inactive_winbar = {
+				lualine_a = {
+					'filename',
 				}
 			}
 		})

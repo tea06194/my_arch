@@ -1,10 +1,12 @@
 7zip
 android-tools
+ardour
 base
 base-devel
 droidcam
 fd
 firefox
+foot
 fzf
 git
 go
@@ -14,6 +16,7 @@ greetd-regreet
 greetd-wlgreet
 grim
 grub
+guitarix
 htop
 hyprland
 hyprland-protocols
@@ -49,12 +52,14 @@ ripgrep
 sing-geoip-db
 sing-geosite-db
 slurp
+stomptuner
 sudo
 swappy
 telegram-desktop
 tk
 tofi
 ttf-nerd-fonts-symbols
+ttf-ubuntu-font-family
 udisks2
 uwsm
 v4l2loopback-dc-dkms

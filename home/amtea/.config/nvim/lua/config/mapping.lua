@@ -37,7 +37,7 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', opts)
 -- i_CTRL-R in (t)
 vim.keymap.set('t', '<C-R>', function()
     return '<C-\\><C-N>"' .. vim.fn.nr2char(vim.fn.getchar()) .. 'pi'
-end, { noremap = true, expr = true })
+end, opts)
 
 -- DIFF --
 function ToggleDiff()
@@ -60,7 +60,7 @@ function ToggleDiffContext()
 end
 
 vim.keymap.set("n", "<leader>diff", ToggleDiff, { desc = "Toggle Diff Mode", table.unpack(opts)})
-vim.keymap.set("n", "<leader>diffc", ToggleDiffContext, { desc = "Toggle Diff Context", table.unpack(opts)})
+vim.keymap.set("n", "<leader>diffc", ToggleDiffContext, { desc = "Toggle Diff Context", table.unpack(opts) })
 
 -- DIAGNOSTIC --
 vim.keymap.set(
@@ -82,5 +82,21 @@ local function set_background(bg)
     print("(" .. theme .. " - " .. bg .. ")") -- Вывод информации
 end
 
-vim.keymap.set("n", "<F5>", function() set_background('dark') end, opts)
-vim.keymap.set("n", "<F6>", function() set_background('light') end, opts)
+-- vim.keymap.set("n", "<F5>", function() set_background('dark') end, opts)
+-- vim.keymap.set("n", "<F6>", function() set_background('light') end, opts)
+
+local function clear_highlights_and_set_colortheme(name)
+  -- Очищаем все highlight-группы
+  vim.cmd("hi clear")
+
+  -- Сбрасываем настройки пользовательских групп
+  if vim.fn.exists("syntax_on") then
+    vim.cmd("syntax reset")
+  end
+
+  -- Опционально: обнуляем `Normal` для более чистого сброса
+  vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
+  vim.cmd("colorscheme " .. name)
+end
+vim.keymap.set("n", "<F4>", function()  clear_highlights_and_set_colortheme('sonokai') end, opts)
+
