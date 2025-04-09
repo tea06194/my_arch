@@ -1,11 +1,9 @@
+cpr
 droidcam
 google-chrome
 greetd-wlgreet
 jmtpfs
 nekoray
-nekoray-debug
-paru
-paru-debug
 sing-geoip-db
 sing-geosite-db
 stomptuner

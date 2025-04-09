@@ -98,5 +98,9 @@ local function clear_highlights_and_set_colortheme(name)
   vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
   vim.cmd("colorscheme " .. name)
 end
+
 vim.keymap.set("n", "<F4>", function()  clear_highlights_and_set_colortheme('sonokai') end, opts)
+
+-- EDITOR --
+vim.keymap.set("n", "<leader>cl", function () vim.opt.cursorline = not vim.opt.cursorline:get() end, opts)
 

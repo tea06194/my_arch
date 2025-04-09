@@ -3,6 +3,9 @@ android-tools
 ardour
 base
 base-devel
+cpr
+docker
+docker-compose
 droidcam
 fd
 firefox
@@ -22,6 +25,7 @@ hyprland
 hyprland-protocols
 hyprpicker
 imagemagick
+jdk-openjdk
 jmtpfs
 jq
 kitty
@@ -43,11 +47,10 @@ nvidia-utils
 obs-studio
 openssh
 pacman-contrib
-paru
-paru-debug
 pavucontrol
 pipewire-pulse
 qt5-base
+reflector
 ripgrep
 sing-geoip-db
 sing-geosite-db
@@ -59,7 +62,6 @@ telegram-desktop
 tk
 tofi
 ttf-nerd-fonts-symbols
-ttf-ubuntu-font-family
 udisks2
 uwsm
 v4l2loopback-dc-dkms

@@ -35,6 +35,8 @@ vim.opt.signcolumn = 'yes'
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
+vim.opt.cursorline = true
+
 -- Comment in gitconfig
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "gitconfig",
