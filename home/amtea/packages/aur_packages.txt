@@ -4,6 +4,8 @@ google-chrome
 greetd-wlgreet
 jmtpfs
 nekoray
+podman-tui
+podman-tui-debug
 sing-geoip-db
 sing-geosite-db
 stomptuner

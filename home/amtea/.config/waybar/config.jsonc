@@ -1,8 +1,17 @@
 {
     "layer": "top",
     "modules-left": ["hyprland/workspaces", "tray"],
-    "modules-center": ["cpu", "memory", "custom/gpu"],
-    "modules-right": ["hyprland/window", "pulseaudio", "custom/backlight", "hyprland/language", "network", "clock", "custom/power"],
+    "modules-center": ["custom/startup", "cpu", "memory", "custom/gpu"],
+    "modules-right": [
+		"network",
+		"hyprland/window",
+		"pulseaudio",
+		// "backlight",
+		"hyprland/language",
+		"clock"
+		// "custom/power",
+		// "custom/theme_toggle"
+	],
 	"hyprland/language": {
 		"format": "{}",
 		"format-en": "US",
@@ -16,7 +25,7 @@
 		"icon" : true
 	},
 	"clock": {
-		"format-alt": "{:%a, %d. %b  %H:%M}"
+		"tooltip-format": "{:%d-%m-%Y}"
 	},
 	"cpu": {
 		"interval": 10,
@@ -29,6 +38,17 @@
 		"interval": 10,
 		"tooltip": false
 	},
+	"custom/startup": {
+		"format": " ",
+		"exec": "~/.config/waybar/startup_time.sh",
+		"tooltip": false,
+		"return-type": "json"
+	},
+	// "custom/theme_toggle": {
+	// 	"format": "🌓",
+	// 	"tooltip": "Переключить тему",
+	// 	"on-click": "~/.config/waybar/toggle-theme.sh"
+	// },
 	"memory": {
 		"interval": 30,
 		"format": "ram {used}GB",

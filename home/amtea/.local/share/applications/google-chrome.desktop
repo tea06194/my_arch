@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=Google Chrome
+Name=Google Chrome UWSM
 # Only KDE 4 seems to use GenericName, so we reuse the KDE strings.
 # From Ubuntu's language-pack-kde-XX-base packages, version 9.04-20090413.
 GenericName=Web Browser
@@ -106,7 +106,7 @@ Comment[zh_CN]=访问互联网
 Comment[zh_HK]=連線到網際網路
 Comment[zh_TW]=連線到網際網路
 StartupWMClass=Google-chrome
-Exec=systemctl --user start chrome.service
+Exec=uwsm app -- /usr/bin/google-chrome-stable %U
 StartupNotify=true
 Terminal=false
 Icon=google-chrome
@@ -116,7 +116,7 @@ MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xht
 Actions=new-window;new-private-window;
 
 [Desktop Action new-window]
-Name=New Window
+Name=New Window UWSM
 Name[am]=አዲስ መስኮት
 Name[ar]=نافذة جديدة
 Name[bg]=Нов прозорец
@@ -168,7 +168,7 @@ Name[vi]=Cửa sổ Mới
 Name[zh_CN]=新建窗口
 Name[zh_TW]=開新視窗
 StartupWMClass=Google-chrome
-Exec=/usr/bin/google-chrome-stable
+Exec=uwsm app -- /usr/bin/google-chrome-stable
 
 [Desktop Action new-private-window]
 Name=New Incognito Window
