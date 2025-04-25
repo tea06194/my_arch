@@ -1,7 +1,6 @@
 cpr
 droidcam
 google-chrome
-greetd-wlgreet
 jmtpfs
 nekoray
 nekoray-debug

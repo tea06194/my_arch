@@ -29,4 +29,4 @@ cp -ruv $USER/.local/share/fonts $USER_BACKUP/.local/share/
 cp -ruv $USER/.local/share/applications $USER_BACKUP/.local/share/
 
 cp -ruv /etc/systemd/system/numlock.service $SYSTEM_SERVICES_BACKUP/
-cp -ruv /etc/systemd/system/greetd-off-on-shutdown.service $SYSTEM_SERVICES_BACKUP/
+cp -ruv /etc/systemd/system/getty@tty1.service.d $SYSTEM_SERVICES_BACKUP/

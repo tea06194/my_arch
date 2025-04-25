@@ -15,9 +15,6 @@ fzf
 git
 go
 google-chrome
-greetd
-greetd-regreet
-greetd-wlgreet
 grim
 grub
 guitarix
