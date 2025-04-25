@@ -1,0 +1,11 @@
+[Unit]
+Description=NumLock
+After=systemd-user-sessions.service
+
+[Service]
+ExecStart=/usr/local/bin/numlock
+StandardInput=tty
+RemindAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

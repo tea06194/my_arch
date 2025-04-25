@@ -1,16 +1,13 @@
 {
     "layer": "top",
-    "modules-left": ["hyprland/workspaces", "tray"],
+    "modules-left": ["custom/pacman", "tray", "hyprland/workspaces", "hyprland/window"],
     "modules-center": ["custom/startup", "cpu", "memory", "custom/gpu"],
     "modules-right": [
 		"network",
-		"hyprland/window",
 		"pulseaudio",
-		// "backlight",
 		"hyprland/language",
 		"clock"
 		// "custom/power",
-		// "custom/theme_toggle"
 	],
 	"hyprland/language": {
 		"format": "{}",
@@ -22,6 +19,7 @@
 		"rewrite": {
 			"(.*)": ""
 		},
+		"separate-outputs": true,
 		"icon" : true
 	},
 	"clock": {
@@ -39,16 +37,22 @@
 		"tooltip": false
 	},
 	"custom/startup": {
-		"format": " ",
+		"format": "",
 		"exec": "~/.config/waybar/startup_time.sh",
-		"tooltip": false,
+		"tooltip": true,
+		"tooltip-format" : "{text}",
 		"return-type": "json"
 	},
-	// "custom/theme_toggle": {
-	// 	"format": "🌓",
-	// 	"tooltip": "Переключить тему",
-	// 	"on-click": "~/.config/waybar/toggle-theme.sh"
-	// },
+	"custom/pacman": {
+		"format": "{icon}{0}",
+		"return-type": "json",
+		"format-icons": {
+			"pending-updates": " ",
+			"updated": ""
+		},
+		"exec-if": "which waybar-updates",
+		"exec": "waybar-updates"
+	},
 	"memory": {
 		"interval": 30,
 		"format": "ram {used}GB",

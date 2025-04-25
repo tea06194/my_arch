@@ -4,6 +4,7 @@ google-chrome
 greetd-wlgreet
 jmtpfs
 nekoray
+nekoray-debug
 podman-tui
 podman-tui-debug
 sing-geoip-db
@@ -12,6 +13,7 @@ stomptuner
 stomptuner-debug
 tofi
 v4l2loopback-dc-dkms
+waybar-updates
 yay
 yay-debug
 zoom

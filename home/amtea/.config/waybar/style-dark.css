@@ -67,6 +67,10 @@ button:hover {
     background: rgba(0, 0, 0, 0.2);
 }
 
+#workspaces button.visible {
+    background-color: #64727D;
+}
+
 #workspaces button.focused {
     background-color: #64727D;
     box-shadow: inset 0 -3px #ffffff;
@@ -88,6 +92,7 @@ button:hover {
 #disk,
 #temperature,
 #backlight,
+#language,
 #network,
 #pulseaudio,
 #wireplumber,
@@ -97,15 +102,20 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
-#mpd {
+#mpd,
+#custom-gpu,
+#custom-pacman {
     padding: 0 10px;
     color: #ffffff;
 }
 
-#window,
-#workspaces {
-    margin: 0 4px;
+#window {
+	padding: 0 5px;
 }
+
+/* #workspaces { */
+/*     margin: 0 4px; */
+/* } */
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
@@ -172,19 +182,6 @@ label:focus {
     background-color: #000000;
 }
 
-#cpu {
-    /*background-color: #2ecc71;*/
-    /*color: #000000;*/
-}
-
-#memory {
-    /*background-color: #9b59b6;*/
-}
-
-#disk {
-    background-color: #964B00;
-}
-
 #backlight {
     background-color: #90b1b1;
 }
@@ -231,17 +228,21 @@ label:focus {
 }
 
 #custom-startup.startup_grey {
-	background-color: grey;
+	color: grey;
 }
 
 #custom-startup.startup_green {
-	background-color: green;
+	color: green;
 }
 #custom-startup.startup_yellow {
-	background-color: yellow;
+	color: yellow;
 }
 #custom-startup.startup_red {
-	background-color: red;
+	color: red;
+}
+
+#custom-pacman {
+    background-color: #64727D;
 }
 
 #temperature {
@@ -294,8 +295,6 @@ label:focus {
 #language {
     background: #00b093;
     color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
     min-width: 16px;
 }
 
@@ -303,7 +302,7 @@ label:focus {
     background: #97e1ad;
     color: #000000;
     padding: 0 0px;
-    margin: 0 5px;
+    /* margin: 0 5px; */
     min-width: 16px;
 }
 

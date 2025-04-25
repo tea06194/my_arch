@@ -2,10 +2,12 @@
 
 USER=/home/amtea
 USER_BACKUP=/home/amtea/my_arch/home/amtea
+SYSTEM_SERVICES_BACKUP=/home/amtea/my_arch/etc/systemd/system
 
 mkdir -p $USER_BACKUP/packages/
 mkdir -p $USER_BACKUP/.config/
 mkdir -p $USER_BACKUP/.local/share/
+mkdir -p $SYSTEM_SERVICES_BACKUP/
 
 pacman -Qqe > $USER_BACKUP/packages/packages.txt
 pacman -Qqm > $USER_BACKUP/packages/aur_packages.txt
@@ -25,3 +27,6 @@ cp -ruv $USER/.config/pwr.sh $USER_BACKUP/.config/
 
 cp -ruv $USER/.local/share/fonts $USER_BACKUP/.local/share/
 cp -ruv $USER/.local/share/applications $USER_BACKUP/.local/share/
+
+cp -ruv /etc/systemd/system/numlock.service $SYSTEM_SERVICES_BACKUP/
+cp -ruv /etc/systemd/system/greetd-off-on-shutdown.service $SYSTEM_SERVICES_BACKUP/

@@ -1,5 +1,7 @@
 lazy-lock.json
 default.target.wants/
+sockets.target.wants/
 mimeapps.list
 mimeinfo.cache
 kitty.conf.bak
+/home/amtea/.config/waybar/style.css

@@ -15,11 +15,14 @@ local is_windows = ya.target_family() == "windows"
 local selected_or_hovered = ya.sync(function()
 	local tab, paths, names, path_fnames = cx.active, {}, {}, {}
 	for _, u in pairs(tab.selected) do
-		paths[#paths + 1] = tostring(u:parent())
-		names[#names + 1] = tostring(u:name())
+		paths[#paths + 1] = tostring(type(u.parent) == "function" and u:parent() or u.parent)
+		names[#names + 1] = tostring(type(u.name) == "function" and u:name() or u.name)
 	end
 	if #paths == 0 and tab.current.hovered then
-		paths[1] = tostring(tab.current.hovered.url:parent())
+		paths[1] = tostring(
+			type(tab.current.hovered.url.parent) == "function" and tab.current.hovered.url:parent()
+			or tab.current.hovered.url.parent
+		)
 		names[1] = tostring(tab.current.hovered.name)
 	end
 	for idx, name in ipairs(names) do
@@ -196,8 +199,7 @@ return {
 		for path, names in pairs(path_fnames) do
 			local archive_status, archive_err =
 				Command(archive_cmd):args(archive_args):arg(output_url):args(names):cwd(path):spawn():wait()
-			if not archive_status or not archive_status.success then
-				notify_error(
+			if not archive_status or not archive_status.success then notify_error(
 					string.format(
 						"%s with selected files failed, exit code %s",
 						archive_args,
