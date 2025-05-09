@@ -104,3 +104,5 @@ vim.keymap.set("n", "<F4>", function()  clear_highlights_and_set_colortheme('son
 -- EDITOR --
 vim.keymap.set("n", "<leader>cl", function () vim.opt.cursorline = not vim.opt.cursorline:get() end, opts)
 
+vim.keymap.set("n", "<leader>cfp", function () vim.fn.setreg("+", vim.fn.expand("%:p")) end, opts)
+

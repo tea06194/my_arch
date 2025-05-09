@@ -1,5 +1,8 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter-textobjects"
+	},
 	build = function()
 		require("nvim-treesitter.install").update({ with_sync = true })()
 	end,
@@ -74,6 +77,122 @@ return {
 					end
 				end,
 				additional_vim_regex_highlighting = false,
+			},
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true,
+					keymaps = {
+						["a="] = {
+							query = "@assignment.outer",
+							desc = "Select outer part of an assignment",
+						},
+						["i="] = {
+							query = "@assignment.inner",
+							desc = "Select inner part of an assignment",
+						},
+						["r="] = {
+							query = "@assignment.rhs",
+							desc = "Select right hand side of an assignment",
+						},
+
+						["aa"] = {
+							query = "@parameter.outer",
+							desc = "Select outer part of a parameter/argument",
+						},
+						["ia"] = {
+							query = "@parameter.inner",
+							desc = "Select inner part of a parameter/argument",
+						},
+
+						["ai"] = {
+							query = "@conditional.outer",
+							desc = "Select outer part of a conditional",
+						},
+						["ii"] = {
+							query = "@conditional.inner",
+							desc = "Select inner part of a conditional",
+						},
+
+						["al"] = {
+							query = "@loop.outer",
+							desc = "Select outer part of a loop",
+						},
+						["il"] = {
+							query = "@loop.inner",
+							desc = "Select inner part of a loop",
+						},
+
+						["ac"] = {
+							query = "@call.outer",
+							desc = "Select outer part of a function call",
+						},
+						["ic"] = {
+							query = "@call.inner",
+							desc = "Select inner part of a function call",
+						},
+
+						["af"] = {
+							query = "@function.outer",
+							desc = "Select outer part of a method/function definition",
+						},
+						["if"] = {
+							query = "@function.inner",
+							desc = "Select inner part of a method/function definition",
+						},
+
+						["at"] = {
+							query = "@class.outer",
+							desc = "Select outer part of a type",
+						},
+						["it"] = {
+							query = "@class.inner",
+							desc = "Select inner part of a type",
+						},
+
+						["an"] = {
+							query = "@block.outer",
+							desc = "Select inner part of a block",
+						},
+						["in"] = {
+							query = "@block.inner",
+							desc = "Select outer part of a block",
+						},
+					},
+				},
+				move = {
+					enable = true,
+					set_jumps = true,
+					goto_next_start = {
+						["]m"] = "@function.outer",
+						["]i"] = "@conditional.outer",
+					},
+					goto_next_end = {
+						["]M"] = "@function.outer",
+						["]I"] = "@conditional.outer",
+					},
+					goto_previous_start = {
+						["[m"] = "@function.outer",
+						["[i"] = "@conditional.outer",
+					},
+					goto_previous_end = {
+						["[M"] = "@function.outer",
+						["[I"] = "@conditional.outer",
+					},
+				},
+				swap = {
+					enable = true,
+					swap_next = {
+						["<leader>man"] = "@parameter.inner",
+						["<leader>mfn"] = "@function.outer",
+						["<leader>mcn"] = "@class.outer",
+					},
+					swap_previous = {
+						["<leader>map"] = "@parameter.inner",
+						["<leader>mfp"] = "@function.outer",
+						["<leader>mcp"] = "@class.outer",
+					},
+				},
 			}
 		})
 	end

@@ -12,6 +12,7 @@ fd
 firefox
 foot
 fzf
+gdb
 git
 go
 google-chrome
@@ -23,6 +24,7 @@ hyprland
 hyprland-protocols
 hyprpicker
 imagemagick
+jack-example-tools
 jdk-openjdk
 jmtpfs
 jq
@@ -77,7 +79,6 @@ wl-clipboard
 xdg-desktop-portal-hyprland
 xorg-xwayland
 yay
-yay-debug
 yazi
 zoom
 zoxide

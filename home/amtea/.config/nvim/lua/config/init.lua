@@ -9,6 +9,22 @@ vim.env.NVIM_CFG = vim.fn.stdpath("config")
 -- vim.env.ALACRITTY_CFG = vim.env.APPDATA .. "/alacritty/"
 vim.env.PATH = "/home/amtea/.nvm/versions/node/v22.14.0/bin:" .. vim.env.PATH
 
+local function load_custom_env(path)
+  local file = io.open(path, "r")
+  if not file then return end
+
+  for line in file:lines() do
+    local key, value = line:match("^([%w_]+)%s*=%s*(.+)$")
+    if key and value then
+      vim.fn.setenv(key, value)
+    end
+  end
+
+  file:close()
+end
+
+load_custom_env(os.getenv("HOME") .. "/.config/.nvimenv")
+
 -- LEADER --
 vim.g.mapleader = " "
 vim.keymap.set("n", "<Space>", "<Nop>", opts)
@@ -154,4 +170,4 @@ vim.diagnostic.config({
 --
 -- vim.api.nvim_create_user_command("WrapInTag", wrap_in_tag, { range = true })
 -- vim.keymap.set("v", "<leader>w", ":WrapInTag<CR>", opts)
---
+
