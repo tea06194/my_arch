@@ -11,7 +11,7 @@ return {
 
 			vim.lsp.config("*",
 				{
-					on_attach = function (client, buffnr)
+					on_attach = function(client, buffnr)
 						if client.server_capabilities.semanticTokensProvider then
 							client.server_capabilities.semanticTokensProvider = nil
 						end
@@ -52,6 +52,12 @@ return {
 							vim.lsp.buf.rename,
 							vim.tbl_extend('force', { buffer = buffnr }, opts)
 						)
+						vim.keymap.set(
+							"n",
+							"<space>fr",
+							vim.lsp.buf.format,
+							vim.tbl_extend('force', { buffer = buffnr }, opts)
+						)
 					end
 				}
 			)
@@ -69,12 +75,12 @@ return {
 				opts
 			)
 
-			vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-				pattern = {"*.hl", "hypr*.conf"},
+			vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+				pattern = { "*.hl", "hypr*.conf" },
 				callback = function()
 					vim.lsp.start {
 						name = "hyprlang",
-						cmd = {"hyprls"},
+						cmd = { "hyprls" },
 						root_dir = vim.fn.getcwd(),
 					}
 				end

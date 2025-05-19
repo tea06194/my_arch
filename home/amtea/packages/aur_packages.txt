@@ -1,9 +1,12 @@
 cpr
+cpr-debug
 droidcam
 google-chrome
 jmtpfs
 nekoray
 nekoray-debug
+org-freedesktop-filemanager1-common-git
+org-freedesktop-filemanager1-common-git-debug
 podman-tui
 podman-tui-debug
 sing-geoip-db

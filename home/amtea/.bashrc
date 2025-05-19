@@ -18,8 +18,11 @@ export EDITOR=nvim
 alias hyprc='nvim ~/.config/hypr/hyprland.conf'
 alias graph='git log --all --decorate --oneline --graph'
 # alias nvim='/home/amtea/.config/kitty_nvim.sh'
-# HISTCONTROL=ignorespace:erasedups # Не пишем в историю команды с пробелом в начале и дубликаты
-# shopt -s histappend  # Добавление в историю, а не перезапись
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+export HISTCONTROL=ignoredups:erasedups
+export PROMPT_COMMAND="history -a; history -c; history -r"
+shopt -s histappend
 
 # Настройка автодополнения по истории
 bind '"\e[A": history-search-backward'
@@ -35,4 +38,10 @@ vpn() {
   shift
   $command "$@"
 }
+
+export ANDROID_HOME=/opt/android-sdk
+export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
+
+export ZK_NOTEBOOK_DIR="$HOME/Documents/zknotes"
 

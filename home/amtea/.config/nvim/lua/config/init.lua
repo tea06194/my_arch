@@ -6,6 +6,7 @@ vim.opt.shellcmdflag = '-i -c'
 
 -- ENV --
 vim.env.NVIM_CFG = vim.fn.stdpath("config")
+
 -- vim.env.ALACRITTY_CFG = vim.env.APPDATA .. "/alacritty/"
 vim.env.PATH = "/home/amtea/.nvm/versions/node/v22.14.0/bin:" .. vim.env.PATH
 
