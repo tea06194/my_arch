@@ -1,12 +1,13 @@
 cpr
 cpr-debug
-droidcam
 google-chrome
 jmtpfs
 nekoray
 nekoray-debug
 org-freedesktop-filemanager1-common-git
 org-freedesktop-filemanager1-common-git-debug
+pass-secret-service-git
+pass-secret-service-git-debug
 podman-tui
 podman-tui-debug
 sing-geoip-db
@@ -14,7 +15,6 @@ sing-geosite-db
 stomptuner
 stomptuner-debug
 tofi
-v4l2loopback-dc-dkms
 waybar-updates
 yay
 yay-debug

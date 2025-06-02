@@ -1,16 +1,14 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects"
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		"eandrju/cellular-automaton.nvim",
 	},
 	build = function()
 		require("nvim-treesitter.install").update({ with_sync = true })()
 	end,
-	config = function ()
+	config = function()
 		require("nvim-treesitter.configs").setup({
-			modules= {},
-			sync_install = false,
-			ignore_install = {},
 			auto_install = false,
 			ensure_installed = {
 				-- languages
@@ -78,6 +76,17 @@ return {
 				end,
 				additional_vim_regex_highlighting = false,
 			},
+			ignore_install = {},
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<C-space>",
+					node_incremental = "<C-space>",
+					scope_incremental = false,
+					node_decremental = "<C-backspace>",
+				},
+			},
+			modules = {},
 			textobjects = {
 				select = {
 					enable = true,
@@ -193,7 +202,9 @@ return {
 						["<leader>mcp"] = "@class.outer",
 					},
 				},
-			}
+			},
+			sync_install = false,
 		})
+		vim.keymap.set("n", "<leader>mir", "<cmd>CellularAutomaton make_it_rain<CR>")
 	end
 }

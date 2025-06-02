@@ -63,7 +63,7 @@ return {
 							spinner = { pre = '', post = '' },
 						},
 						display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage' } },
-						timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
+						timer = { progress_enddelay = 100, spinner = 1000, lsp_client_name_enddelay = 100 },
 						spinner_symbols = { '🌑 ', '🌒 ', '🌓 ', '🌔 ', '🌕 ', '🌖 ', '🌗 ', '🌘 ' },
 					},
 				},
@@ -119,7 +119,11 @@ return {
 			},
 			inactive_winbar = {
 				lualine_a = {
-					'filename',
+					{
+						'filename',
+						path = 3,
+						shorting_target = 1,
+					}
 				}
 			}
 		})

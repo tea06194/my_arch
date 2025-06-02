@@ -10,7 +10,7 @@ return {
 	},
 	config = function()
 		require("nvim-tree").setup({
-			hijack_netrw     = false,
+			hijack_netrw = false,
 			hijack_directories = {
 				enable    = false,
 				auto_open = false,

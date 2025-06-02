@@ -32,7 +32,7 @@ vim.keymap.set('n',	'<leader>xt', function ()
 end, opts)
 
 -- To normal from (t)
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', opts)
+vim.keymap.set('t', '<C-[>', '<C-\\><C-n>', opts)
 
 -- i_CTRL-R in (t)
 vim.keymap.set('t', '<C-R>', function()
@@ -103,6 +103,7 @@ vim.keymap.set("n", "<F4>", function()  clear_highlights_and_set_colortheme('son
 
 -- EDITOR --
 vim.keymap.set("n", "<leader>cl", function () vim.opt.cursorline = not vim.opt.cursorline:get() end, opts)
+vim.keymap.set("n", "<leader>cc", function () vim.opt.cursorcolumn = not vim.opt.cursorcolumn:get() end, opts)
 
 vim.keymap.set("n", "<leader>cfp", function () vim.fn.setreg("+", vim.fn.expand("%:p")) end, opts)
 

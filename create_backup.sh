@@ -23,6 +23,7 @@ find "$USER/ManualPackages" -type f -name PKGBUILD | while read -r pkgbuild_path
 done
 
 cp -ruv $USER/.config/autostart $USER_BACKUP/.config/
+cp -ruv $USER/.config/environment.d $USER_BACKUP/.config/
 cp -ruv $USER/.config/hypr $USER_BACKUP/.config/
 cp -ruv $USER/.config/kitty $USER_BACKUP/.config/
 cp -ruv $USER/.config/nvim $USER_BACKUP/.config/

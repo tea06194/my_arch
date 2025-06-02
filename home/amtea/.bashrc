@@ -45,3 +45,4 @@ export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
 
 export ZK_NOTEBOOK_DIR="$HOME/Documents/zknotes"
 
+eval "$(zoxide init bash)"

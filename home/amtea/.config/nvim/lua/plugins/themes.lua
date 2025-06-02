@@ -4,6 +4,8 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
+			local theme_file = vim.fn.expand("~/.config/theme/current_theme")
+			local theme = vim.fn.filereadable(theme_file) == 1 and vim.fn.readfile(theme_file)[1] or "dark"
 			local light = {
 				black = { "#181819", "255" },
 				bg_dim = { "#f8f8f8", "254" },
@@ -33,36 +35,41 @@ return {
 			vim.keymap.set(
 				"n",
 				"<leader>lg",
-				function ()
+				function()
 					vim.g.sonokai_colors_override = light
 					vim.cmd.colorscheme('sonokai')
-					vim.api.nvim_set_hl(0, "MatchParen", {
-						bg='#5adfe6',
-						fg='#000000'
-					})
 				end
 			)
 			vim.keymap.set(
 				"n",
 				"<leader>dr",
-				function ()
+				function()
 					vim.g.sonokai_colors_override = {
-						none = {'NONE', 'NONE'}
+						none = { 'NONE', 'NONE' }
 					}
 					vim.cmd.colorscheme('sonokai')
-					vim.api.nvim_set_hl(0, "MatchParen", {
-						bg='#5adfe6',
-						fg='#000000'
-					})
 				end
 			)
 			vim.g.sonokai_enable_italic = true
+			if theme == "light" then
+					vim.g.sonokai_colors_override = light
+			end
+
 			vim.cmd.colorscheme('sonokai')
+
 			vim.api.nvim_set_hl(0, "MatchParen", {
-				bg='#5adfe6',
-				fg='#000000'
+				bg = '#acfafe',
+				fg = '#000000',
+			})
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				pattern = "*",
+				callback = function()
+					vim.api.nvim_set_hl(0, "MatchParen", {
+						bg = '#acfafe',
+						fg = '#000000',
+					})
+				end,
 			})
 		end
 	}
 }
-

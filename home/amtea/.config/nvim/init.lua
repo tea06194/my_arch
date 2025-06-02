@@ -1,6 +1,3 @@
-require("config.lazy")
-
-require("config.mapping")
-
 require("config")
-
+require("config.lazy")
+require("config.mapping")
