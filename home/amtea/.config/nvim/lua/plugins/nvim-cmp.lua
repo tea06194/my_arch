@@ -7,17 +7,18 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"hrsh7th/cmp-emoji",
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
 			"windwp/nvim-autopairs",
 			"windwp/nvim-ts-autotag",
 		},
 		config = function()
-			local cmp                                 = require("cmp")
-			local luasnip                             = require("luasnip")
-			local ts_utils                            = require("nvim-treesitter.ts_utils")
-			local cmp_autopairs                       = require("nvim-autopairs.completion.cmp")
-			local default_handler                     = cmp_autopairs.filetypes["*"]["("].handler
+			local cmp             = require("cmp")
+			local luasnip         = require("luasnip")
+			local ts_utils        = require("nvim-treesitter.ts_utils")
+			local cmp_autopairs   = require("nvim-autopairs.completion.cmp")
+			local default_handler = cmp_autopairs.filetypes["*"]["("].handler
 
 			require("nvim-autopairs").setup({})
 
@@ -86,6 +87,7 @@ return {
 					{ name = "nvim_lsp_signature_help" },
 					{ name = "luasnip" },
 					{ name = "buffer" },
+					{ name = 'emoji' }
 				}),
 				formatting = {
 					format = function(entry, vim_item)

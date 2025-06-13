@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Telegram
 Comment=New era of messaging
-TryExec=telegram-desktop
-Exec=telegram-desktop -autostart
+TryExec=Telegram
+Exec=Telegram -autostart
 Icon=org.telegram.desktop
 Terminal=false
 StartupWMClass=TelegramDesktop

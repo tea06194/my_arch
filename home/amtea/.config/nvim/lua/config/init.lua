@@ -33,29 +33,28 @@ vim.keymap.set("n", "<Space>", "<Nop>", opts)
 -- LANG --
 vim.env.LANG = "en_US.UTF-8"
 
-local function escape(str)
-	-- You need to escape these characters to work correctly
-	local escape_chars = [[;,."|\/]]
-	return vim.fn.escape(str, escape_chars)
-end
-
--- Recommended to use lua template string
-local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
-local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
-local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
-local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
-
-vim.opt.langmap = vim.fn.join({
-	-- | `to` should be first     | `from` should be second
-	escape(ru_shift) .. ';' .. escape(en_shift),
-	escape(ru) .. ';' .. escape(en),
-}, ',')
-
--- vim.opt.langmap = "йq,цw,уe,кr,еt,нy,гu,шi,щo,зp,х[,ъ],фa,ыs,вd,аf,пg,рh,оj,лk,дl,ж\\;,э',ё`,яz,чx,сc,мv,иb,тn,ьm,б\\,,ю.,ЙQ,ЦW,УE,КR,ЕT,НY,ГU,ШI,ЩO,ЗP,Х{,Ъ},ФA,ЫS,ВD,АF,ПG,РH,ОJ,ЛK,ДL,Ж:,Э\",ЯZ,ЧX,СC,МV,ИB,ТN,ЬM,Б<,Ю>,Ё~"
+vim.keymap.set('i', '<C-х>', '<C-[>', opts)
+vim.keymap.set('i', '<C-к>', '<C-r>', opts)
 --
 -- vim.keymap.set('i', '<C-ц>', '<C-w>', opts)
--- vim.keymap.set('i', '<C-х>', '<C-[>', opts)
 -- vim.keymap.set('i', '<C-щ>', '<C-o>', opts)
+
+-- local function escape(str)
+-- 	local escape_chars = [[;,."|\]]
+-- 	return vim.fn.escape(str, escape_chars) end
+--
+-- local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
+-- local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
+-- local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
+-- local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
+-- local langmap = vim.fn.join({
+-- 	escape(ru_shift) .. ";" .. escape(en_shift),
+-- 	escape(ru) .. ";" .. escape(en),
+-- }, ",")
+--
+-- vim.opt.langmap = langmap
+-- vim.opt.langmap =
+-- "йq,цw,уe,кr,еt,нy,гu,шi,щo,зp,х[,ъ],фa,ыs,вd,аf,пg,рh,оj,лk,дl,ж\\;,э',ё`,яz,чx,сc,мv,иb,тn,ьm,б\\,,ю.,ЙQ,ЦW,УE,КR,ЕT,НY,ГU,ШI,ЩO,ЗP,Х{,Ъ},ФA,ЫS,ВD,АF,ПG,РH,ОJ,ЛK,ДL,Ж:,Э\",ЯZ,ЧX,СC,МV,ИB,ТN,ЬM,Б<,Ю>,Ё~"
 
 -- STATUSLINE --
 vim.opt.statusline = "%{bufnr()} %<%f %h%m%r%=%-14.(%l,%c%V%) %P"
@@ -104,3 +103,14 @@ vim.diagnostic.config({
 	severity_sort = false, -- Не сортировать диагностику по уровню серьёзности
 })
 
+require("config.hyprswitch_async").setup();
+
+vim.api.nvim_create_autocmd('User', {
+	pattern = 'LazyVimStarted',
+	callback = function()
+		local stats = require('lazy').stats()
+		print('Startup in: ' .. stats.startuptime .. 'ms')
+	end
+})
+
+require("config.swapdiff-light").setup()

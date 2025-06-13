@@ -2,6 +2,9 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		lazy = true,
+		keys = {
+			{ "<leader>Db", "<cmd>lua require'dap'.toggle_breakpoint() <CR>", desc = "Toggle Debug breakpoint" }
+		},
 		config = function()
 			local dap = require("dap")
 
@@ -16,26 +19,43 @@ return {
 			}
 
 			dap.configurations.javascript = {
-				{
-					type = 'pwa-node',
-					request = 'launch',
-					name = 'Node launch',
-					program = '${file}',
-					cwd = '${workspaceFolder}',
-				},
+				-- {
+				-- 	type = 'pwa-node',
+				-- 	request = 'launch',
+				-- 	name = 'Node launch',
+				-- 	program = '${file}',
+				-- 	cwd = '${workspaceFolder}',
+				-- },
 				{
 					type = "pwa-node",
 					request = "attach",
 					name = "Node attach",
-					processId = require("dap.utils").pick_process(),
+					-- processId = require("dap.utils").pick_process(),
 					cwd = '${workspaceFolder}',
-					-- port = 9229,
+					port = 9229,
 					-- sourceMaps = true,
 					-- resolveSourceMapLocations = {
 					-- 	"${workspaceFolder}/**",
 					-- 	"!**/node_modules/**",
 					-- },
 					-- skipFiles = { "<node_internals>/**" },
+					-- cwd = vim.fn.getcwd()
+				}
+			}
+			dap.configurations.typescript = {
+				{
+					type = "pwa-node",
+					request = "attach",
+					name = "Node attach",
+					cwd = '${workspaceFolder}',
+					port = 9229,
+					sourceMaps = true,
+					outFiles = { "${workspaceFolder}/dist/**/*.js" },
+					resolveSourceMapLocations = {
+						"${workspaceFolder}/**",
+						"!**/node_modules/**",
+					},
+					skipFiles = { "<node_internals>/**" },
 					-- cwd = vim.fn.getcwd()
 				}
 			}

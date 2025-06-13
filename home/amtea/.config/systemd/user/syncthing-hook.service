@@ -1,0 +1,15 @@
+[Unit]
+Description=Syncthing Git Hook Service
+After=syncthing.service
+Wants=syncthing.service
+BindsTo=syncthing.service
+
+[Service]
+Type=simple
+WorkingDirectory=%h/Documents/zknotes/.auto-push
+ExecStart=/usr/bin/node ./dist/auto-push.js
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

@@ -14,6 +14,7 @@ pacman -Qqm > $USER_BACKUP/packages/aur_packages.txt
 
 cp -ruv $USER/.bash_profile $USER_BACKUP/
 cp -ruv $USER/.bashrc $USER_BACKUP/
+cp -ruv $USER/.makepkg.conf $USER_BACKUP/
 
 find "$USER/ManualPackages" -type f -name PKGBUILD | while read -r pkgbuild_path; do
     relative_path="${pkgbuild_path#$USER/}"
@@ -23,6 +24,7 @@ find "$USER/ManualPackages" -type f -name PKGBUILD | while read -r pkgbuild_path
 done
 
 cp -ruv $USER/.config/autostart $USER_BACKUP/.config/
+cp -ruv $USER/.config/audacious $USER_BACKUP/.config/
 cp -ruv $USER/.config/environment.d $USER_BACKUP/.config/
 cp -ruv $USER/.config/hypr $USER_BACKUP/.config/
 cp -ruv $USER/.config/kitty $USER_BACKUP/.config/

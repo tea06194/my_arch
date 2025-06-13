@@ -4,14 +4,14 @@ return {
 		lazy = false,
 		config = function()
 			require('tabout').setup {
-				tabkey = '<C-0>',     -- key to trigger tabout, set to an empty string to disable
+				tabkey = '<C-0>',  -- key to trigger tabout, set to an empty string to disable
 				backwards_tabkey = '<C-9>', -- key to trigger backwards tabout, set to an empty string to disable
-				act_as_tab = false,    -- shift content if tab out is not possible
+				act_as_tab = false, -- shift content if tab out is not possible
 				act_as_shift_tab = false, -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
 				default_tab = '<Tab>', -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
 				default_shift_tab = '<S-Tab>', -- reverse shift default action,
 				enable_backwards = true, -- well ...
-				completion = false,   -- if the tabkey is used in a completion pum
+				completion = false, -- if the tabkey is used in a completion pum
 				tabouts = {
 					{ open = "'", close = "'" },
 					{ open = '"', close = '"' },
@@ -29,15 +29,8 @@ return {
 			-- "L3MON4D3/LuaSnip",
 			"hrsh7th/nvim-cmp"
 		},
-		opt = true,          -- Set this to true if the plugin is optional
+		opt = true,        -- Set this to true if the plugin is optional
 		event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
 		priority = 1000,
-	},
-	-- {
-	-- 	"L3MON4D3/LuaSnip",
-	-- 	keys = function()
-	-- 		-- Disable default tab keybinding in LuaSnip
-	-- 		return {}
-	-- 	end,
-	-- },
+	}
 }

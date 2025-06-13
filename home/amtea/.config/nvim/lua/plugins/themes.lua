@@ -52,7 +52,7 @@ return {
 			)
 			vim.g.sonokai_enable_italic = true
 			if theme == "light" then
-					vim.g.sonokai_colors_override = light
+				vim.g.sonokai_colors_override = light
 			end
 
 			vim.cmd.colorscheme('sonokai')

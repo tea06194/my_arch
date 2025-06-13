@@ -20,51 +20,51 @@ local function get_relaltive_time(commit_time)
 end
 
 local ago_message_author_hash_fn = function(line_porcelain, config, idx)
-    local hash = string.sub(line_porcelain.hash, 0, 7)
-    local line_with_hl = {}
-    local is_commited = hash ~= "0000000"
-    if is_commited then
+	local hash = string.sub(line_porcelain.hash, 0, 7)
+	local line_with_hl = {}
+	local is_commited = hash ~= "0000000"
+	if is_commited then
 		local summary
 		if #line_porcelain.summary > config.max_summary_width then
 			summary = string.sub(
-			line_porcelain.summary,
-			0,
-			config.max_summary_width - 3
+				line_porcelain.summary,
+				0,
+				config.max_summary_width - 3
 			) .. "..."
 		else
 			summary = line_porcelain.summary
 		end
-        line_with_hl = {
-            idx = idx,
-            values = {
-                {
-                    textValue = get_relaltive_time(line_porcelain.committer_time),
-                    hl = hash,
-                },
-                {
-                    textValue = hash,
-                    hl = "Comment",
-                },
-                {
-                    textValue = line_porcelain.author,
-                    hl = hash,
-                },
-            },
-            format = "%s %s %s",
-        }
-    else
-        line_with_hl = {
-            idx = idx,
-            values = {
-                {
-                    textValue = "Not commited",
-                    hl = "Comment",
-                },
-            },
-            format = "%s",
-        }
-    end
-    return line_with_hl
+		line_with_hl = {
+			idx = idx,
+			values = {
+				{
+					textValue = get_relaltive_time(line_porcelain.committer_time),
+					hl = hash,
+				},
+				{
+					textValue = hash,
+					hl = "Comment",
+				},
+				{
+					textValue = line_porcelain.author,
+					hl = hash,
+				},
+			},
+			format = "%s %s %s",
+		}
+	else
+		line_with_hl = {
+			idx = idx,
+			values = {
+				{
+					textValue = "Not commited",
+					hl = "Comment",
+				},
+			},
+			format = "%s",
+		}
+	end
+	return line_with_hl
 end
 
 return {
@@ -73,15 +73,15 @@ return {
 		lazy = false,
 		config = function()
 			require('blame').setup {
-				virtual_style='right_align',
-				format_fn=ago_message_author_hash_fn,
+				virtual_style = 'right_align',
+				format_fn = ago_message_author_hash_fn,
 			}
-            vim.keymap.set(
-                "n",
-                "<leader>gb",
-                "<cmd>BlameToggle virtual<CR>",
-                { desc = "blame", noremap = true }
-            )
+			vim.keymap.set(
+				"n",
+				"<leader>gbf",
+				"<cmd>BlameToggle virtual<CR>",
+				{ desc = "blame", noremap = true }
+			)
 		end,
 	},
 }

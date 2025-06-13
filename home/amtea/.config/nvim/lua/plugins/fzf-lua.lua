@@ -1,4 +1,4 @@
-local uv = vim.uv or vim.loop
+local uv = vim.uv
 
 ---Strips "oil://" prefix from a string if present.
 ---@param path string
@@ -150,27 +150,31 @@ return {
 				fzf.helptags()
 			end, { desc = "find help tags" })
 
+			vim.keymap.set("n", "<leader>fk", function()
+				fzf.keymaps()
+			end, { desc = "find keymaps" })
+
 			vim.keymap.set("n", "<leader>fb", function()
 				fzf.buffers()
 			end, { desc = "find buffers" })
 
-			vim.keymap.set("n", "<leader>gfs", function()
+			vim.keymap.set("n", "<leader>fgs", function()
 				fzf.git_status()
 			end)
-			--
+
 			-- Zoxide keymaps
 			vim.keymap.set(
 				"n",
-				"<leader>zx",
+				"<leader>zxo",
 				":FzfLua zoxide<CR>",
 				{ desc = "zoxide directories" })
 
-			-- vim.keymap.set("n", "<leader>zxa", function()
-			-- 	local buf_path = vim.api.nvim_buf_get_name(0)
-			-- 	local dir = vim.fn.fnamemodify(buf_path, ":p:h")
-			--
-			-- 	vim.fn.system("zoxide add " .. vim.fn.shellescape(strip_oil_prefix(dir)))
-			-- end, { desc = "add directory to zoxide" })
+			vim.keymap.set("n", "<leader>zxa", function()
+				local buf_path = vim.api.nvim_buf_get_name(0)
+				local dir = vim.fn.fnamemodify(buf_path, ":p:h")
+
+				vim.fn.system("zoxide add " .. vim.fn.shellescape(strip_oil_prefix(dir)))
+			end, { desc = "add directory to zoxide" })
 		end
 	}
 }

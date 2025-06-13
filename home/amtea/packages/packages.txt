@@ -5,7 +5,6 @@ audacious
 base
 base-devel
 cpr
-cpr-debug
 docker
 docker-compose
 expac
@@ -39,7 +38,6 @@ luanti
 mako
 man-db
 mpv
-nekoray
 neovim
 networkmanager
 noto-fonts-emoji
@@ -50,7 +48,6 @@ nvidia-utils
 obs-studio
 openssh
 org-freedesktop-filemanager1-common-git
-org-freedesktop-filemanager1-common-git-debug
 pacman-contrib
 pass-secret-service-git
 pavucontrol
@@ -77,6 +74,7 @@ tofi
 ttf-nerd-fonts-symbols
 udisks2
 uwsm
+v2raya
 waybar
 waybar-updates
 wget

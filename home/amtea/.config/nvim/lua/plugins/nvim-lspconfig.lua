@@ -14,8 +14,6 @@ return {
 		config = function()
 			require("lazydev").setup()
 
-			local lspconfig = require("lspconfig")
-
 			vim.lsp.config("*",
 				{
 					on_attach = function(client, bufnr)
@@ -23,19 +21,19 @@ return {
 
 						vim.keymap.set(
 							"n",
-							"gd",
+							"<space>lgd",
 							vim.lsp.buf.definition,
 							vim.tbl_extend('force', { buffer = bufnr }, opts)
 						)
 						vim.keymap.set(
 							"n",
-							"gr",
+							"<space>lgr",
 							vim.lsp.buf.references,
 							vim.tbl_extend('force', { buffer = bufnr }, opts)
 						)
 						vim.keymap.set(
 							"n",
-							"gi",
+							"<space>lgi",
 							vim.lsp.buf.implementation,
 							vim.tbl_extend('force', { buffer = bufnr }, opts)
 						)
@@ -53,13 +51,13 @@ return {
 						)
 						vim.keymap.set(
 							"n",
-							"<space>rn",
+							"<space>lrn",
 							vim.lsp.buf.rename,
 							vim.tbl_extend('force', { buffer = bufnr }, opts)
 						)
 						vim.keymap.set(
 							"n",
-							"<space>fr", function()
+							"<space>lfr", function()
 								-- local buf_clients = vim.lsp.get_clients({ bufnr = bufnr })
 								-- local has_preferred = false;
 								--
@@ -80,10 +78,34 @@ return {
 									-- 	end
 									-- 	return format_client.server_capabilities.documentFormattingProvider ~= nil
 									-- end,
+									async = false,
+									timeout_ms = 10000
 								})
 							end,
 							vim.tbl_extend('force', { buffer = bufnr }, opts)
 						)
+						vim.keymap.set(
+							{ "n", "v" },
+							"<leader>lca",
+							vim.lsp.buf.code_action,
+							opts
+						)
+						vim.keymap.set("n", "<leader>lrs", function()
+							local buf_clients = vim.lsp.get_clients({ bufnr = bufnr })
+							local seen = {}
+
+							vim.diagnostic.reset()
+
+							for _, buf_client in ipairs(buf_clients) do
+								local name = buf_client.name
+								if not seen[name] then
+									seen[name] = true
+									vim.cmd("LspRestart " .. name)
+								end
+							end
+
+							vim.notify("LSP restarted", vim.log.levels.INFO)
+						end, { desc = "Reset diagnostics & restart LSP" })
 					end
 				}
 			)
@@ -100,19 +122,11 @@ return {
 					"selene.yml",
 					".git"
 				}
+
 			})
 
-			vim.keymap.set("n", "<leader>lr", function()
-				vim.diagnostic.reset()
-				vim.cmd("LspRestart")
-				vim.notify("LSP restarted", vim.log.levels.INFO)
-			end, { desc = "Reset diagnostics & restart LSP" })
-			vim.keymap.set(
-				{ "n", "v" },
-				"<leader>ca",
-				vim.lsp.buf.code_action,
-				opts
-			)
+			vim.lsp.config("cssmodules_ls", {
+			})
 
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
 				pattern = { "*.hl", "hypr*.conf" },

@@ -1,4 +1,6 @@
-local opts = { noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
+local M = require("config.functions.utils")
+local described = M.described
 
 -- WINDOWS NAVIGATION --
 -- (t)
@@ -21,14 +23,14 @@ vim.keymap.set('n', '<A-l>', '<C-w>l', opts)
 
 -- TERMINAL --
 -- Open terminal bottom
-vim.keymap.set('n', '<leader>tt', ':belowright sp | terminal<CR> i', opts)
+vim.keymap.set('n', '<leader>th', ':belowright sp | terminal<CR> i', opts)
 
 -- Open terminal right
 vim.keymap.set('n', '<leader>tv', ':belowright vsp | terminal<CR> i', opts)
 
 -- Open external terminal to wd
-vim.keymap.set('n',	'<leader>xt', function ()
-		vim.fn.system('kitty --directory="' .. vim.fn.getcwd() ..'" &')
+vim.keymap.set('n', '<leader>tx', function()
+	vim.fn.system('kitty --directory="' .. vim.fn.getcwd() .. '" &')
 end, opts)
 
 -- To normal from (t)
@@ -36,74 +38,61 @@ vim.keymap.set('t', '<C-[>', '<C-\\><C-n>', opts)
 
 -- i_CTRL-R in (t)
 vim.keymap.set('t', '<C-R>', function()
-    return '<C-\\><C-N>"' .. vim.fn.nr2char(vim.fn.getchar()) .. 'pi'
-end, opts)
+	return '<C-\\><C-N>"' .. vim.fn.getcharstr() .. 'pi'
+end, vim.tbl_extend("force", opts, { expr = true }))
 
 -- DIFF --
 function ToggleDiff()
-  if vim.wo.diff then
-    vim.cmd("windo diffoff")
-  else
-    vim.cmd("windo diffthis")
-  end
+	if vim.wo.diff then
+		vim.cmd("windo diffoff")
+	else
+		vim.cmd("windo diffthis")
+	end
 end
 
 function ToggleDiffContext()
-  local diffopt = vim.opt.diffopt:get()
-  if vim.tbl_contains(diffopt, "context:0") then
-    vim.opt.diffopt:remove("context:0")
-    print("Diff context выключен")
-  else
-    vim.opt.diffopt:append("context:0")
-    print("Diff context включен")
-  end
+	local diffopt = vim.opt.diffopt:get()
+	if vim.tbl_contains(diffopt, "context:0") then
+		vim.opt.diffopt:remove("context:0")
+		print("Diff context выключен")
+	else
+		vim.opt.diffopt:append("context:0")
+		print("Diff context включен")
+	end
 end
 
-vim.keymap.set("n", "<leader>diff", ToggleDiff, { desc = "Toggle Diff Mode", table.unpack(opts)})
-vim.keymap.set("n", "<leader>diffc", ToggleDiffContext, { desc = "Toggle Diff Context", table.unpack(opts) })
-
+vim.keymap.set("n", "<leader>do", ToggleDiff, described(opts, "Toggle Diff Mode"))
+vim.keymap.set("n", "<leader>dc", ToggleDiffContext, described(opts, "Toggle Diff Context"))
+vim.keymap.set('n', '<leader>dg', '<cmd>diffget<CR>', { desc = 'Get hunk from other diff' })
+vim.keymap.set('n', '<leader>dp', '<cmd>diffput<CR>', { desc = 'Put hunk to other diff' })
 -- DIAGNOSTIC --
-vim.keymap.set(
-	"n",
-	"<leader>diag",
-	function()
-		vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-	end,
-	{ desc = "Toggle diagnostic virtual_lines", table.unpack(opts) }
-)
 
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<C-W>d', function ()
+	vim.diagnostic.open_float()
+	vim.diagnostic.open_float()
+end, opts)
+-- vim.keymap.set(
+-- 	"n",
+-- 	"<leader>diag",
+-- 	function()
+-- 		vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+-- 	end,
+-- 	described(opts, "Toggle diagnostic virtual_lines")
+-- )
 
 -- COLORTHEME --
--- Toggle background
-local function set_background(bg)
-    vim.o.background = bg -- Устанавливаем светлую или тёмную тему
-    local theme = vim.g.colors_name -- Получаем текущую тему
-    print("(" .. theme .. " - " .. bg .. ")") -- Вывод информации
-end
 
--- vim.keymap.set("n", "<F5>", function() set_background('dark') end, opts)
--- vim.keymap.set("n", "<F6>", function() set_background('light') end, opts)
+-- EDIT --
 
-local function clear_highlights_and_set_colortheme(name)
-  -- Очищаем все highlight-группы
-  vim.cmd("hi clear")
+-- Move current line(s) ---
 
-  -- Сбрасываем настройки пользовательских групп
-  if vim.fn.exists("syntax_on") then
-    vim.cmd("syntax reset")
-  end
-
-  -- Опционально: обнуляем `Normal` для более чистого сброса
-  vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
-  vim.cmd("colorscheme " .. name)
-end
-
-vim.keymap.set("n", "<F4>", function()  clear_highlights_and_set_colortheme('sonokai') end, opts)
+vim.keymap.set("n", "<leader>j", ":m .+1<CR>==")
+vim.keymap.set("n", "<leader>k", ":m .-2<CR>==")
+vim.keymap.set("v", "<leader>j", ":'<,'>m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<leader>k", ":'<,'>m '<-2<CR>gv=gv")
 
 -- EDITOR --
-vim.keymap.set("n", "<leader>cl", function () vim.opt.cursorline = not vim.opt.cursorline:get() end, opts)
-vim.keymap.set("n", "<leader>cc", function () vim.opt.cursorcolumn = not vim.opt.cursorcolumn:get() end, opts)
+vim.keymap.set("n", "<leader>cl", function() vim.opt.cursorline = not vim.opt.cursorline:get() end, opts)
+vim.keymap.set("n", "<leader>cc", function() vim.opt.cursorcolumn = not vim.opt.cursorcolumn:get() end, opts)
 
-vim.keymap.set("n", "<leader>cfp", function () vim.fn.setreg("+", vim.fn.expand("%:p")) end, opts)
-
+vim.keymap.set("n", "<leader>cfp", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, opts)
