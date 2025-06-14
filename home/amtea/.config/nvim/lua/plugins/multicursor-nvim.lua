@@ -1,12 +1,6 @@
 return {
 	{
 		"jake-stewart/multicursor.nvim",
-		lazy = true,
-		keys = {
-			{ "<up>",      mode = { "n", "x" }, desc = "Line add Cursor 1" },
-			{ "<down>",    mode = { "n", "x" }, desc = "Line add Cursor -1" },
-			{ "<leader>n", mode = { "n", "x" }, desc = "Match add Cursor 1" },
-		},
 		config = function()
 			local mc = require("multicursor-nvim")
 

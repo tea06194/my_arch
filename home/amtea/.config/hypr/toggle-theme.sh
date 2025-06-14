@@ -33,8 +33,6 @@ if [[ -f "$ARDOUR_UI" ]]; then
     "$ARDOUR_UI"
 fi
 
-kitten themes $([[ \"$NEW\" == \"dark\" ]] && echo My Theme || echo One Half Light)
-
 hyprctl notify 5 3000 "rgb(ff1ea3)" "🌗_$NEW"
 
 echo "$NEW" > ~/.config/theme/current_theme

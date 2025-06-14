@@ -39,8 +39,6 @@ return {
 			"kevinhwang91/promise-async",
 			"nvim-treesitter/nvim-treesitter",
 		},
-		lazy = false,
-		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("ufo").setup({
 				close_fold_kinds_for_ft = {

@@ -20,8 +20,6 @@ return {
 				filters = { dotfiles = true },
 				filesystem_watchers = { enable = false },
 			})
-
-			-- vim.keymap.set("n", "<leader>tree", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
 		end,
 	}
 }

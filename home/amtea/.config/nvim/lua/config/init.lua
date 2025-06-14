@@ -103,8 +103,6 @@ vim.diagnostic.config({
 	severity_sort = false, -- Не сортировать диагностику по уровню серьёзности
 })
 
-require("config.hyprswitch_async").setup();
-
 vim.api.nvim_create_autocmd('User', {
 	pattern = 'LazyVimStarted',
 	callback = function()
@@ -112,5 +110,3 @@ vim.api.nvim_create_autocmd('User', {
 		print('Startup in: ' .. stats.startuptime .. 'ms')
 	end
 })
-
-require("config.swapdiff-light").setup()

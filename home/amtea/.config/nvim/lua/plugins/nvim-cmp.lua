@@ -1,6 +1,8 @@
 return {
 	{
 		"hrsh7th/nvim-cmp",
+		lazy = true,
+		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
@@ -47,6 +49,9 @@ return {
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
+					["<C-n>"] = cmp.mapping(function()
+						cmp.complete()
+					end, { "i", "s" }),
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 
@@ -68,7 +73,7 @@ return {
 						elseif luasnip.locally_jumpable(1) then
 							luasnip.jump(1)
 						else
-							cmp.complete()
+							fallback()
 						end
 					end, { "i", "s" }),
 

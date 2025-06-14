@@ -1,10 +1,6 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		lazy = true,
-		keys = {
-			{ "<leader>Db", "<cmd>lua require'dap'.toggle_breakpoint() <CR>", desc = "Toggle Debug breakpoint" }
-		},
 		config = function()
 			local dap = require("dap")
 

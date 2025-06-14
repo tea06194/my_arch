@@ -162,7 +162,24 @@ return {
 				fzf.git_status()
 			end)
 
-			-- Zoxide keymaps
+			-- Zoxide
+
+			---Adds directory to zoxide asynchronously
+			---@param dir string
+			local function add_to_zoxide(dir)
+				local clean_dir = strip_oil_prefix(dir)
+				vim.fn.jobstart({
+					"zoxide", "add", clean_dir
+				}, {
+					detach = true,
+					on_exit = function(_, code)
+						if code ~= 0 then
+							vim.notify("Failed to add directory to zoxide: " .. clean_dir, vim.log.levels.WARN)
+						end
+					end
+				})
+			end
+
 			vim.keymap.set(
 				"n",
 				"<leader>zxo",
@@ -172,9 +189,15 @@ return {
 			vim.keymap.set("n", "<leader>zxa", function()
 				local buf_path = vim.api.nvim_buf_get_name(0)
 				local dir = vim.fn.fnamemodify(buf_path, ":p:h")
-
-				vim.fn.system("zoxide add " .. vim.fn.shellescape(strip_oil_prefix(dir)))
+				add_to_zoxide(dir)
 			end, { desc = "add directory to zoxide" })
+
+			vim.api.nvim_create_autocmd("DirChanged", {
+				group = vim.api.nvim_create_augroup("ZoxideIntegration", { clear = true }),
+				callback = function(args)
+					add_to_zoxide(args.file)
+				end,
+			})
 		end
 	}
 }

@@ -1,6 +1,12 @@
 return {
 	{
 		"olimorris/codecompanion.nvim",
+		lazy = true,
+		keys = {
+			{ "<leader>Cc", "<cmd>CodeCompanionChat Toggle<CR>", desc = "Chat" },
+			{ "<leader>Ca", "<cmd>CodeCompanionActions<CR>",     desc = "AI Actions",        mode = { "n", "v" } },
+			{ "<leader>Cx", "<cmd>CodeCompanionCommand<CR>",     desc = "Generate Shell Cmd" },
+		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -58,10 +64,6 @@ return {
 		},
 		config = function(_, opts)
 			require("codecompanion").setup(opts)
-
-			vim.keymap.set("n", "<leader>Cc", "<cmd>CodeCompanionChat Toggle<CR>", { desc = "Chat" })
-			vim.keymap.set({ "n", "v" }, "<leader>Ca", "<cmd>CodeCompanionActions<CR>", { desc = "AI Actions" })
-			vim.keymap.set("n", "<leader>Cx", "<cmd>CodeCompanionCommand<CR>", { desc = "Generate Shell Cmd" })
 		end,
 	}
 }
