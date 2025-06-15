@@ -215,18 +215,17 @@ local function get_original_buffnr()
 end
 
 ---Completion function
----@param arglead integer
+---@param arglead string
 local function completion(arglead)
 	local bufs = {}
 	for _, bufnr in ipairs(find_swap_buffers()) do
 		local name = api.nvim_buf_get_name(bufnr)
-		table.insert(bufs, tostring(bufnr))
 		if name ~= '' then
 			table.insert(bufs, name)
 		end
 	end
 	return vim.tbl_filter(function(item)
-		return item:find(arglead, 1, true) == 1
+		return vim.startswith(item, arglead)
 	end, bufs)
 end
 
@@ -234,7 +233,17 @@ end
 ---@param swapfile SwapDiffSwapInfo
 ---@param callback function
 local function recover_swapfile(swapfile, callback)
-	local tmpfile = fn.tempname()
+    local original_file = swapfile.info.fname
+    local ext = vim.fn.fnamemodify(original_file, ':e')
+	local mtime_formatted = os.date('%Y-%m-%d-%H', swapfile.info.mtime)
+
+    local tmpfile = fn.tempname()
+    if ext ~= '' then
+        local base_tmpfile = tmpfile
+        tmpfile = base_tmpfile .. '.' .. mtime_formatted .. '.' .. ext
+    else
+        tmpfile = tmpfile .. '.' .. mtime_formatted
+    end
 
 	local cmd = {
 		'nvim',

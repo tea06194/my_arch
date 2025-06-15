@@ -34,6 +34,7 @@ cp -ruv $USER/.config/tofi $USER_BACKUP/.config/
 cp -ruv $USER/.config/waybar $USER_BACKUP/.config/
 cp -ruv $USER/.config/yazi $USER_BACKUP/.config/
 cp -ruv $USER/.config/pwr.sh $USER_BACKUP/.config/
+cp -ruv $USER/.config/mimeapps.list $USER_BACKUP/.config/
 
 cp -ruv $USER/.local/share/fonts $USER_BACKUP/.local/share/
 cp -ruv $USER/.local/share/applications $USER_BACKUP/.local/share/

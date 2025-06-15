@@ -129,6 +129,7 @@ return {
 			})
 
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+				group = vim.api.nvim_create_augroup("HyprlangLsp", { clear = true }),
 				pattern = { "*.hl", "hypr*.conf" },
 				callback = function()
 					vim.lsp.start {
@@ -137,6 +138,18 @@ return {
 						root_dir = vim.fn.getcwd(),
 					}
 				end
+			})
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("DisableLspForTempFiles", { clear = true }),
+				callback = function(args)
+					local buf = args.buf
+					local filepath = vim.api.nvim_buf_get_name(buf)
+
+					if filepath:match("^/tmp/nvim") then
+						vim.diagnostic.enable(false, { bufnr = buf })
+					end
+				end,
 			})
 		end,
 	}

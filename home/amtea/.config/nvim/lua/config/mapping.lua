@@ -67,18 +67,19 @@ vim.keymap.set('n', '<leader>dg', '<cmd>diffget<CR>', { desc = 'Get hunk from ot
 vim.keymap.set('n', '<leader>dp', '<cmd>diffput<CR>', { desc = 'Put hunk to other diff' })
 -- DIAGNOSTIC --
 
-vim.keymap.set('n', '<C-W>d', function ()
+vim.keymap.set('n', '<C-W>d', function()
 	vim.diagnostic.open_float()
 	vim.diagnostic.open_float()
 end, opts)
--- vim.keymap.set(
--- 	"n",
--- 	"<leader>diag",
--- 	function()
--- 		vim.diagnostic.enable(not vim.diagnostic.is_enabled())
--- 	end,
--- 	described(opts, "Toggle diagnostic virtual_lines")
--- )
+
+vim.keymap.set(
+	"n",
+	"<leader>dd",
+	function()
+		vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+	end,
+	described(opts, "Toggle diagnostic virtual_lines")
+)
 
 -- COLORTHEME --
 
