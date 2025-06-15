@@ -7,3 +7,34 @@ kitty.conf.bak
 /home/amtea/.local/share/fonts/.uuid
 /home/amtea/.local/share/applications/mimeapps.list
 /home/amtea/.local/share/applications/mimeinfo.cache
+
+# Temporary files and logs
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Build directories
+build/
+pkg/
+src/
+
+# System reports
+system-report-*.txt
+
+# Installation logs
+install-*.log
+maintenance-*.log
+
+# Package management
+*.pkg.tar.xz
+*.pkg.tar.zst
+
+# Editor temporary files
+.vscode/
+.idea/
+*.sublime-*
