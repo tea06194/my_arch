@@ -29,14 +29,30 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+###
+# nvm auto switch
+
+# opts
+# export NVM_AUTO_SWITCH_QUIET=false  # true silent
+# export NVM_AUTO_INSTALL=true
+
+if [ -f "$HOME/.config/nvm/nvm-autoswitch.sh" ]; then
+    source "$HOME/.config/nvm/nvm-autoswitch.sh"
+    auto_switch_node
+else
+    echo "⚠️  nvm-autoswitch.sh not found. Please check the installation path."
+fi
+
+###
 
 vpn() {
-  export all_proxy="socks5h://127.0.0.1:2080"
-  command="$1"
-  shift
-  $command "$@"
+	export all_proxy="socks5h://127.0.0.1:2080"
+	command="$1"
+	shift
+	$command "$@"
 }
 
 export ANDROID_HOME=/opt/android-sdk

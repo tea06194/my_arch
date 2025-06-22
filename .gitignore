@@ -2,7 +2,6 @@ lazy-lock.json
 default.target.wants/
 sockets.target.wants/
 kitty.conf.bak
-/home/amtea/.config/waybar/style.css
 /home/amtea/.local/share/fonts/TTF/.uuid
 /home/amtea/.local/share/fonts/.uuid
 /home/amtea/.local/share/applications/mimeapps.list

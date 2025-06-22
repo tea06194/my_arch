@@ -40,6 +40,7 @@ man-db
 mpv
 neovim
 networkmanager
+networkmanager-openvpn
 noto-fonts-emoji
 numlockx
 nvidia
@@ -47,6 +48,7 @@ nvidia-settings
 nvidia-utils
 obs-studio
 openssh
+openvpn
 org-freedesktop-filemanager1-common-git
 pacman-contrib
 pass-secret-service-git

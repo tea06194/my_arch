@@ -5,7 +5,8 @@ return {
 		priority = 1000,
 		config = function()
 			local theme_file = vim.fn.expand("~/.config/theme/current_theme")
-			local theme = vim.fn.filereadable(theme_file) == 1 and vim.fn.readfile(theme_file)[1] or "dark"
+			local init_theme = vim.fn.filereadable(theme_file) == 1 and vim.fn.readfile(theme_file)[1] or "dark"
+			local theme = init_theme
 			local light = {
 				black = { "#181819", "255" },
 				bg_dim = { "#f8f8f8", "254" },
@@ -32,11 +33,13 @@ return {
 				grey_dim = { "#595f6f", "240" },
 				none = { "NONE", "NONE" },
 			}
+
 			vim.keymap.set(
 				"n",
 				"<leader>lg",
 				function()
 					vim.g.sonokai_colors_override = light
+					theme = "light"
 					vim.cmd.colorscheme('sonokai')
 				end
 			)
@@ -47,20 +50,24 @@ return {
 					vim.g.sonokai_colors_override = {
 						none = { 'NONE', 'NONE' }
 					}
+					theme = "dark"
 					vim.cmd.colorscheme('sonokai')
 				end
 			)
 			vim.g.sonokai_enable_italic = true
-			if theme == "light" then
+			if init_theme == "light" then
 				vim.g.sonokai_colors_override = light
 			end
 
 			vim.cmd.colorscheme('sonokai')
 
+			vim.cmd.highlight('IndentLineCurrent guifg=#414550')
+
 			vim.api.nvim_set_hl(0, "MatchParen", {
 				bg = '#acfafe',
 				fg = '#000000',
 			})
+
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				pattern = "*",
 				callback = function()
@@ -68,7 +75,13 @@ return {
 						bg = '#acfafe',
 						fg = '#000000',
 					})
-				end,
+					if theme == "dark" then
+						vim.cmd.highlight('IndentLineCurrent guifg=#414550')
+					else
+						vim.cmd.highlight('IndentLineCurrent guifg=#d8d8d8')
+					end
+				end
+				,
 			})
 		end
 	}
