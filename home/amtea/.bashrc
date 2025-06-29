@@ -36,14 +36,14 @@ export NVM_DIR="$HOME/.nvm"
 # nvm auto switch
 
 # opts
-# export NVM_AUTO_SWITCH_QUIET=false  # true silent
+export NVM_AUTO_SWITCH_QUIET=true  # true silent
 # export NVM_AUTO_INSTALL=true
 
 if [ -f "$HOME/.config/nvm/nvm-autoswitch.sh" ]; then
-    source "$HOME/.config/nvm/nvm-autoswitch.sh"
-    auto_switch_node
+	source "$HOME/.config/nvm/nvm-autoswitch.sh"
+	auto_switch_node
 else
-    echo "⚠️  nvm-autoswitch.sh not found. Please check the installation path."
+	echo "⚠️  nvm-autoswitch.sh not found. Please check the installation path."
 fi
 
 ###

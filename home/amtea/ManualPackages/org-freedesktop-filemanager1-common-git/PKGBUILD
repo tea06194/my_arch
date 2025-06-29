@@ -11,34 +11,34 @@ depends=('dbus')
 makedepends=('git' 'meson' 'ninja' 'gcc' 'pkgconf')
 
 optdepends=(
-  'systemd:        sd‑bus provider via libsystemd'
-  'elogind:        alternative sd‑bus provider'
-  'basu:           fallback sd‑bus provider'
-  'ranger:         for ranger‑wrapper.sh'
-  'yazi:           for yazi‑wrapper.sh'
-  'nnn:            for nnn‑wrapper.sh'
-  'vifm:           for vifm‑wrapper.sh'
-  'lf:             for lf‑wrapper.sh'
-  'glib2:          for gdbus CLI in tests'
+	'systemd:        sd‑bus provider via libsystemd'
+	'elogind:        alternative sd‑bus provider'
+	'basu:           fallback sd‑bus provider'
+	'ranger:         for ranger‑wrapper.sh'
+	'yazi:           for yazi‑wrapper.sh'
+	'nnn:            for nnn‑wrapper.sh'
+	'vifm:           for vifm‑wrapper.sh'
+	'lf:             for lf‑wrapper.sh'
+	'glib2:          for gdbus CLI in tests'
 )
 
 source=("${pkgname}::git+$url.git")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/$pkgname"
-  echo "0.1.r$(git rev-list --count HEAD).g$(git rev-parse --short HEAD)"
+	cd "$srcdir/$pkgname"
+	echo "0.1.r$(git rev-list --count HEAD).g$(git rev-parse --short HEAD)"
 }
 
 build() {
-  cd "$srcdir/$pkgname"
-  meson setup build --buildtype=release
-  ninja -C build
+	cd "$srcdir/$pkgname"
+	meson setup build --buildtype=release
+	ninja -C build
 }
 
 package() {
-  cd "$srcdir/$pkgname"
-  DESTDIR="$pkgdir" meson install -C build
+	cd "$srcdir/$pkgname"
+	DESTDIR="$pkgdir" meson install -C build
 
-  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }

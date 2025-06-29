@@ -6,6 +6,39 @@ return {
 			"tpope/vim-rhubarb",
 		},
 		config = function()
+			_G.CustomGitLabHandlerLua = function(opts)
+				if not opts.remote or not opts.remote:match("gitlab%.pla") then
+					return ""
+				end
+
+				local remote = opts.remote
+					:gsub("^.*//", "")
+					:gsub("git@", "")
+					:gsub(":", "/")
+					:gsub("%.git$", "")
+
+				local url = ("https://%s/-/blob/%s/%s"):format(remote, opts.commit or "HEAD", opts.path or "")
+
+				if opts.line1 then
+					url = url .. "#L" .. opts.line1
+					if opts.line2 and opts.line2 ~= opts.line1 then
+						url = url .. "-" .. opts.line2
+					end
+				end
+
+				return url
+			end
+
+			-- Регистрируем VimL-обертку, вызывающую Lua-функцию
+			vim.cmd([[
+				function! CustomGitLabHandler(opts) abort
+				return luaeval("_G.CustomGitLabHandlerLua(_A)", a:opts)
+				endfunction
+
+				let g:fugitive_browse_handlers = get(g:, 'fugitive_browse_handlers', [])
+				call add(g:fugitive_browse_handlers, function('CustomGitLabHandler'))
+			]])
+
 			vim.keymap.set(
 				"n",
 				"<leader>gg",
@@ -49,12 +82,6 @@ return {
 				"<leader>gy",
 				":'<'>GBrowse!<cr>",
 				{ desc = "Copy link to current lines" }
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>gB",
-				":Git blame<cr>",
-				{ desc = "Open blame" }
 			)
 		end,
 	},

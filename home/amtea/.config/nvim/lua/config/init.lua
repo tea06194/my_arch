@@ -104,6 +104,11 @@ vim.diagnostic.config({
 	severity_sort = false, -- Не сортировать диагностику по уровню серьёзности
 })
 
+vim.api.nvim_create_user_command('Restart', function()
+	vim.fn.system('hyprctl dispatch exec "kitty nvim" &')
+	vim.cmd('qa!')
+end, {})
+
 vim.api.nvim_create_autocmd('User', {
 	pattern = 'LazyVimStarted',
 	callback = function()

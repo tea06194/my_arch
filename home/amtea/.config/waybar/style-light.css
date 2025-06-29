@@ -2,12 +2,12 @@
 
 window#waybar {
 	background-color: rgba(245, 245, 245, 0.9);
-	border-bottom: 3px solid rgba(180, 180, 180, 0.5);
+	border-bottom: 1px solid rgba(180, 180, 180, 0.5);
 	color: #000000;
 }
 
 window#waybar.fullscreen {
-	background-color: #d4f2ee;
+	background-color: rgba(236, 255, 249, 0.9);
 }
 
 window#waybar.termite {

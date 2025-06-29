@@ -4,6 +4,7 @@ ardour
 audacious
 base
 base-devel
+code
 cpr
 docker
 docker-compose
@@ -26,9 +27,11 @@ hyprpicker
 imagemagick
 jack-example-tools
 jdk-openjdk
+jdk21-openjdk
 jmtpfs
 jq
 kitty
+lazygit
 lib32-nvidia-utils
 linux
 linux-firmware
@@ -39,6 +42,7 @@ mako
 man-db
 mpv
 neovim
+nerd-fonts-noto-sans-mono
 networkmanager
 networkmanager-openvpn
 noto-fonts-emoji

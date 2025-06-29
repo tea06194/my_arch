@@ -24,10 +24,10 @@ auto_switch_node() {
 				[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "📦 Installing Node.js version from .nvmrc..."
 				nvm install
 			else
-				[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "⚠️  Node.js version $(cat "${nvmrc_path}") not installed. Run 'nvm install' to install it."
+				[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "⚠️  Node.js version $(cat "${nvm_path}") not installed. Run 'nvm install' to install it."
 			fi
 		elif [ "$nvm_version" != "$node_version" ]; then
-			[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "🔄 Switching to Node.js $(cat "${nvmrc_path}")"
+			[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "🔄 Switching to Node.js $(cat "${nvm_path}")"
 			nvm use "$nvm_version"
 		fi
 	else

@@ -1,7 +1,8 @@
 * {
 	/* `otf-font-awesome` is required to be installed for icons */
 	font-family:
-		Liberation Mono,
+		Noto Sans,
+		Symbols Nerd Font,
 		RedHatMono,
 		FontAwesome,
 		Roboto,
@@ -9,6 +10,10 @@
 		Arial,
 		sans-serif;
 	font-size: 13px;
+}
+
+window#waybar>box {
+	padding-bottom: 1px;
 }
 
 window#waybar.hidden {

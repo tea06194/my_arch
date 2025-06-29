@@ -11,20 +11,31 @@ return {
 		---@type blink.cmp.Config
 		opts = {
 			completion = {
+				ghost_text = {
+					enabled = true,
+				},
+				list = {
+					selection = { preselect = true, auto_insert = false }
+				},
 				menu = {
 					draw = {
 						components = {
 							label_description = {
 								width = {
 									fill = true,
-									max = 60
+									max = 60,
 								},
 							}
 						}
 					}
 				}
 			},
-			keymap = { preset = 'enter' },
+			keymap = {
+				preset = 'cmdline',
+				['<CR>'] = { 'accept', 'fallback' },
+				['<Tab>'] = { 'snippet_forward', 'select_next', 'fallback' },
+				['<S-Tab>'] = { 'snippet_backward', 'select_prev', 'fallback' }
+			},
 			signature = { enabled = false },
 			snippets = { preset = 'luasnip' },
 			sources = {
@@ -42,9 +53,30 @@ return {
 						should_show_items = function()
 							return true
 						end
+					},
+					cmdline = {
+						min_keyword_length = function(ctx)
+							-- when typing a command, only show when the keyword is 3 characters or longer
+							if ctx.mode == 'cmdline' and string.find(ctx.line, ' ') == nil then return 3 end
+							return 0
+						end
 					}
 				},
 			},
+			cmdline = {
+				completion = {
+					menu = {
+						auto_show = function(ctx)
+							return vim.fn.getcmdtype() == ':' or vim.fn.getcmdtype() == '@'
+							-- enable for inputs as well, with:
+							-- or vim.fn.getcmdtype() == '@'
+						end,
+					}
+				},
+				keymap = {
+					['<CR>'] = { 'accept', 'fallback' }
+				}
+			}
 		},
 		opts_extend = { "sources.default" }
 	},

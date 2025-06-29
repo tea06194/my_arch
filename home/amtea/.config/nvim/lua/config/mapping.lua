@@ -21,6 +21,15 @@ vim.keymap.set('n', '<A-j>', '<C-w>j', opts)
 vim.keymap.set('n', '<A-k>', '<C-w>k', opts)
 vim.keymap.set('n', '<A-l>', '<C-w>l', opts)
 
+-- SCRATCH BUFF -- 
+
+vim.keymap.set('n', '<leader>scr', function()
+	vim.cmd('new')
+	vim.bo.buftype = 'nofile'
+	vim.bo.bufhidden = 'wipe'
+	vim.bo.swapfile = false
+end, opts)
+
 -- TERMINAL --
 -- Open terminal bottom
 vim.keymap.set('n', '<leader>th', ':belowright sp | terminal<CR> i', opts)
@@ -84,6 +93,8 @@ vim.keymap.set(
 -- COLORTHEME --
 
 -- EDIT --
+vim.keymap.set('v', '<leader>y', '"+y', { noremap = true, silent = true })
+vim.keymap.set({'n','v'}, '<leader>p', '"+p', { noremap = true, silent = true })
 
 -- Move current line(s) ---
 

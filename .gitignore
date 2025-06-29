@@ -1,6 +1,7 @@
 lazy-lock.json
 default.target.wants/
 sockets.target.wants/
+plugins_temp/
 kitty.conf.bak
 /home/amtea/.local/share/fonts/TTF/.uuid
 /home/amtea/.local/share/fonts/.uuid

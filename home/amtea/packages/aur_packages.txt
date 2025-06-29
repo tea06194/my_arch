@@ -1,6 +1,7 @@
 cpr
 google-chrome
 jmtpfs
+nerd-fonts-noto-sans-mono
 org-freedesktop-filemanager1-common-git
 pass-secret-service-git
 podman-tui

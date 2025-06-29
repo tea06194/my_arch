@@ -92,7 +92,7 @@ return {
 						{
 							"filename",
 							path = 3,
-							shorting_target = 1,
+							shorting_target = 10,
 						}
 					},
 					lualine_z = {
@@ -123,7 +123,7 @@ return {
 						{
 							'filename',
 							path = 3,
-							shorting_target = 1,
+							shorting_target = 10,
 						}
 					}
 				}
