@@ -91,7 +91,24 @@ return {
 
 			})
 
-			vim.lsp.config("cssmodules_ls", {
+			vim.lsp.config("lemminx", {
+				init_options = {
+					settings = {
+						xml = {
+							-- Когда в fonts.conf встретится SYSTEM "urn:fontconfig:fonts.dtd",
+							-- подставлять локальный файл /etc/fonts/fonts.dtd
+							fileAssociations = {
+								{
+									systemId = "urn:fontconfig:fonts.dtd",
+									uri      = "file:///etc/fonts/fonts.dtd",
+									pattern  = "**/fonts.conf",
+								},
+							},
+							-- Необязательно: OASIS‑каталоги мы не используем
+							catalogs = {},
+						},
+					},
+				},
 			})
 
 			vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {

@@ -35,7 +35,6 @@ vim.env.LANG = "en_US.UTF-8"
 
 vim.keymap.set('i', '<C-х>', '<C-[>', opts)
 vim.keymap.set('i', '<C-к>', '<C-r>', opts)
---
 -- vim.keymap.set('i', '<C-ц>', '<C-w>', opts)
 -- vim.keymap.set('i', '<C-щ>', '<C-o>', opts)
 
@@ -62,6 +61,7 @@ vim.opt.showmode = false
 
 -- EDITOR --
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.numberwidth = 1
 
 vim.opt.signcolumn = 'yes'

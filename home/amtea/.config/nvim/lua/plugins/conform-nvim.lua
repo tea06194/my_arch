@@ -22,6 +22,7 @@ return {
 					json            = { "prettier", lsp_format = "fallback" },
 					css             = { "stylelint", lsp_format = "fallback" },
 					scss            = { "stylelint", lsp_format = "fallback" },
+					markdown        = { "mdformat", lsp_format = "fallback" }
 				},
 			})
 
@@ -37,15 +38,15 @@ return {
 					json            = true,
 					html            = true,
 					yaml            = true,
-					markdown        = true,
 					css             = true,
 					scss            = true,
+					markdown        = true,
 				}
 
 				local use_conform = conform_fts[ft] and (
 					(ft ~= "css" and ft ~= "scss" and has_prettier_config(bufnr))
 					-- для css/scss всегда можно
-					or ft == "css" or ft == "scss"
+					or ft == "css" or ft == "scss" or "markdown"
 				)
 
 				if use_conform then

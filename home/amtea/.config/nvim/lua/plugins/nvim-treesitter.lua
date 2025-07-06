@@ -115,14 +115,14 @@ return {
 								desc = "Select inner part of a parameter/argument",
 							},
 
-							["ai"] = {
+							--[[ ["ai"] = {
 								query = "@conditional.outer",
 								desc = "Select outer part of a conditional",
 							},
 							["ii"] = {
 								query = "@conditional.inner",
 								desc = "Select inner part of a conditional",
-							},
+							}, ]]
 
 							["al"] = {
 								query = "@loop.outer",
@@ -173,7 +173,7 @@ return {
 					move = {
 						enable = true,
 						set_jumps = true,
-						goto_next_start = {
+						--[[ goto_next_start = {
 							["]m"] = "@function.outer",
 							["]i"] = "@conditional.outer",
 						},
@@ -188,7 +188,7 @@ return {
 						goto_previous_end = {
 							["[M"] = "@function.outer",
 							["[I"] = "@conditional.outer",
-						},
+						}, ]]
 					},
 					swap = {
 						enable = true,

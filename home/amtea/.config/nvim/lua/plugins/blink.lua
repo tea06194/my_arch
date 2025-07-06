@@ -31,10 +31,11 @@ return {
 				}
 			},
 			keymap = {
-				preset = 'cmdline',
+				['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation', 'fallback' },
 				['<CR>'] = { 'accept', 'fallback' },
-				['<Tab>'] = { 'snippet_forward', 'select_next', 'fallback' },
-				['<S-Tab>'] = { 'snippet_backward', 'select_prev', 'fallback' }
+
+				['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+				['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' }
 			},
 			signature = { enabled = false },
 			snippets = { preset = 'luasnip' },

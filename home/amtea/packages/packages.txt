@@ -79,6 +79,7 @@ tk
 tofi
 ttf-nerd-fonts-symbols
 udisks2
+unzip
 uwsm
 v2raya
 waybar

@@ -90,6 +90,14 @@ vim.keymap.set(
 	described(opts, "Toggle diagnostic virtual_lines")
 )
 
+vim.keymap.set(
+	"n",
+	"<leader>dl",
+	function()
+		vim.diagnostic.setqflist({})
+	end,
+	described(opts, "Show diagnostic list")
+)
 -- COLORTHEME --
 
 -- EDIT --

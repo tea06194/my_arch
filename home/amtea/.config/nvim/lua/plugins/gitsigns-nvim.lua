@@ -13,19 +13,19 @@ return {
 			)
 			vim.keymap.set(
 				"n",
-				"<leader>gv",
+				"<leader>hv",
 				":Gitsigns preview_hunk<CR>",
 				{ desc = "preview hunk" }
 			)
 			vim.keymap.set(
 				"n",
-				"[g",
+				"[h",
 				":Gitsigns prev_hunk<CR>",
 				{ desc = "go to prev hunk" }
 			)
 			vim.keymap.set(
 				"n",
-				"]g",
+				"]h",
 				":Gitsigns next_hunk<CR>",
 				{ desc = "go to next hunk" }
 			)

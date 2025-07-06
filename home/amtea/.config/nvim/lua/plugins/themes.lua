@@ -75,10 +75,13 @@ return {
 						bg = '#acfafe',
 						fg = '#000000',
 					})
+
 					if theme == "dark" then
-						vim.cmd.highlight('IndentLineCurrent guifg=#414550')
+						vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#595f6f' })
+						vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbolOff', { fg = '#ff9900' })
 					else
-						vim.cmd.highlight('IndentLineCurrent guifg=#d8d8d8')
+						vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#d8d8d8' })
+						vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbolOff', { fg = '#ff9900' })
 					end
 				end
 				,
