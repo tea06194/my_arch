@@ -50,16 +50,16 @@ return {
 			{
 				"<leader>gph",
 				function()
-					require('gitgraph').draw({}, { all = true, max_count = 5000 })
+					require('gitgraph').draw({}, { all = true, max_count = 1000 })
 				end,
-				desc = "GitGraph - Draw",
+				desc = "graph",
 			},
 			{
 				"<leader>gpd",
 				function()
-					require('gitgraph').draw_dual({ commit_info_as_branch_color=true }, { all = true, max_count = 5000 })
+					require('gitgraph').draw_dual({ commit_info_as_branch_color=true }, { all = true, max_count = 1000 })
 				end,
-				desc = "GitGraph - Dual Pane",
+				desc = "graph dual",
 			},
 		},
 	}

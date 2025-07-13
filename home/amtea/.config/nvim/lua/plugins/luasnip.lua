@@ -5,11 +5,13 @@ return {
 		dependencies = { "rafamadriz/friendly-snippets" },
 		config = function()
 			local ls = require("luasnip")
+			local vscode_loader = require("luasnip.loaders.from_vscode")
 			ls.config.set_config {
 				cut_selection_keys = "<Tab>",
 			}
-			require("luasnip.loaders.from_vscode").lazy_load()
-			require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/my_snippets" })
+			vscode_loader.lazy_load()
+			vscode_loader.lazy_load({ paths = "~/.config/nvim/my_snippets" })
+			ls.filetype_extend("tsdoc", {"typescript", "typescriptreact"})
 		end,
 	}
 }

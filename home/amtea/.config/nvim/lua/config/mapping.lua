@@ -4,51 +4,46 @@ local described = M.described
 
 -- WINDOWS NAVIGATION --
 -- (t)
-vim.keymap.set('t', '<A-h>', '<C-\\><C-N><C-w>h', opts)
-vim.keymap.set('t', '<A-j>', '<C-\\><C-N><C-w>j', opts)
-vim.keymap.set('t', '<A-k>', '<C-\\><C-N><C-w>k', opts)
-vim.keymap.set('t', '<A-l>', '<C-\\><C-N><C-w>l', opts)
+vim.keymap.set('t', '<A-h>', '<C-\\><C-N><C-w>h', described(opts, "go to left window"))
+vim.keymap.set('t', '<A-j>', '<C-\\><C-N><C-w>j', described(opts, "go to down window"))
+vim.keymap.set('t', '<A-k>', '<C-\\><C-N><C-w>k', described(opts, "go to up window"))
+vim.keymap.set('t', '<A-l>', '<C-\\><C-N><C-w>l', described(opts, "go to right window"))
 
 -- (i)
-vim.keymap.set('i', '<A-h>', '<C-\\><C-N><C-w>h', opts)
-vim.keymap.set('i', '<A-j>', '<C-\\><C-N><C-w>j', opts)
-vim.keymap.set('i', '<A-k>', '<C-\\><C-N><C-w>k', opts)
-vim.keymap.set('i', '<A-l>', '<C-\\><C-N><C-w>l', opts)
+vim.keymap.set('i', '<A-h>', '<C-\\><C-N><C-w>h', described(opts, "go to left window"))
+vim.keymap.set('i', '<A-j>', '<C-\\><C-N><C-w>j', described(opts, "go to down window"))
+vim.keymap.set('i', '<A-k>', '<C-\\><C-N><C-w>k', described(opts, "go to up window"))
+vim.keymap.set('i', '<A-l>', '<C-\\><C-N><C-w>l', described(opts, "go to right window"))
 
 -- (n)
-vim.keymap.set('n', '<A-h>', '<C-w>h', opts)
-vim.keymap.set('n', '<A-j>', '<C-w>j', opts)
-vim.keymap.set('n', '<A-k>', '<C-w>k', opts)
-vim.keymap.set('n', '<A-l>', '<C-w>l', opts)
+vim.keymap.set('n', '<A-h>', '<C-w>h', described(opts, "go to left window"))
+vim.keymap.set('n', '<A-j>', '<C-w>j', described(opts, "go to down window"))
+vim.keymap.set('n', '<A-k>', '<C-w>k', described(opts, "go to up window"))
+vim.keymap.set('n', '<A-l>', '<C-w>l', described(opts, "go to right window"))
 
--- SCRATCH BUFF -- 
-
+-- SCRATCH BUFF --
 vim.keymap.set('n', '<leader>scr', function()
 	vim.cmd('new')
 	vim.bo.buftype = 'nofile'
 	vim.bo.bufhidden = 'wipe'
 	vim.bo.swapfile = false
-end, opts)
+end, described(opts, "create scratch buffer"))
 
 -- TERMINAL --
--- Open terminal bottom
-vim.keymap.set('n', '<leader>th', ':belowright sp | terminal<CR> i', opts)
-
--- Open terminal right
-vim.keymap.set('n', '<leader>tv', ':belowright vsp | terminal<CR> i', opts)
-
+-- Open bottom
+vim.keymap.set('n', '<leader>th', ':belowright sp | terminal<CR> i', described(opts, "open terminal horizontal"))
+-- Open right
+vim.keymap.set('n', '<leader>tv', ':belowright vsp | terminal<CR> i', described(opts, "open terminal vertical"))
 -- Open external terminal to wd
 vim.keymap.set('n', '<leader>tx', function()
 	vim.fn.system('kitty --directory="' .. vim.fn.getcwd() .. '" &')
-end, opts)
-
+end, described(opts, "open external terminal"))
 -- To normal from (t)
-vim.keymap.set('t', '<C-[>', '<C-\\><C-n>', opts)
-
+vim.keymap.set('t', '<C-[>', '<C-\\><C-n>', described(opts, "exit terminal mode"))
 -- i_CTRL-R in (t)
 vim.keymap.set('t', '<C-R>', function()
 	return '<C-\\><C-N>"' .. vim.fn.getcharstr() .. 'pi'
-end, vim.tbl_extend("force", opts, { expr = true }))
+end, described(vim.tbl_extend("force", opts, { expr = true }), "paste register"))
 
 -- DIFF --
 function ToggleDiff()
@@ -70,49 +65,48 @@ function ToggleDiffContext()
 	end
 end
 
-vim.keymap.set("n", "<leader>do", ToggleDiff, described(opts, "Toggle Diff Mode"))
-vim.keymap.set("n", "<leader>dc", ToggleDiffContext, described(opts, "Toggle Diff Context"))
-vim.keymap.set('n', '<leader>dg', '<cmd>diffget<CR>', { desc = 'Get hunk from other diff' })
-vim.keymap.set('n', '<leader>dp', '<cmd>diffput<CR>', { desc = 'Put hunk to other diff' })
--- DIAGNOSTIC --
+vim.keymap.set("n", "<leader>do", ToggleDiff, described(opts, "toggle diff mode"))
+vim.keymap.set("n", "<leader>dc", ToggleDiffContext, described(opts, "toggle diff context"))
+vim.keymap.set('n', '<leader>dg', '<cmd>diffget<CR>', described(opts, "get hunk from other diff"))
+vim.keymap.set('n', '<leader>dp', '<cmd>diffput<CR>', described(opts, "put hunk to other diff"))
 
+-- DIAGNOSTIC --
 vim.keymap.set('n', '<C-W>d', function()
 	vim.diagnostic.open_float()
 	vim.diagnostic.open_float()
-end, opts)
-
+end, described(opts, "open diagnostic float"))
 vim.keymap.set(
 	"n",
 	"<leader>dd",
 	function()
 		vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 	end,
-	described(opts, "Toggle diagnostic virtual_lines")
+	described(opts, "toggle diagnostic virtual_lines")
 )
-
 vim.keymap.set(
 	"n",
 	"<leader>dl",
 	function()
 		vim.diagnostic.setqflist({})
 	end,
-	described(opts, "Show diagnostic list")
+	described(opts, "show diagnostic list")
 )
+
 -- COLORTHEME --
 
 -- EDIT --
-vim.keymap.set('v', '<leader>y', '"+y', { noremap = true, silent = true })
-vim.keymap.set({'n','v'}, '<leader>p', '"+p', { noremap = true, silent = true })
-
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', described({ noremap = true, silent = true }, "yank to clipboard"))
+vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', described({ noremap = true, silent = true }, "paste from clipboard"))
 -- Move current line(s) ---
-
-vim.keymap.set("n", "<leader>j", ":m .+1<CR>==")
-vim.keymap.set("n", "<leader>k", ":m .-2<CR>==")
-vim.keymap.set("v", "<leader>j", ":'<,'>m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<leader>k", ":'<,'>m '<-2<CR>gv=gv")
+vim.keymap.set("n", "<leader>j", ":m .+1<CR>==", described(opts, "move line down"))
+vim.keymap.set("n", "<leader>k", ":m .-2<CR>==", described(opts, "move line up"))
+vim.keymap.set("v", "<leader>j", ":'<,'>m '>+1<CR>gv=gv", described(opts, "move selection down"))
+vim.keymap.set("v", "<leader>k", ":'<,'>m '<-2<CR>gv=gv", described(opts, "move selection up"))
 
 -- EDITOR --
-vim.keymap.set("n", "<leader>cl", function() vim.opt.cursorline = not vim.opt.cursorline:get() end, opts)
-vim.keymap.set("n", "<leader>cc", function() vim.opt.cursorcolumn = not vim.opt.cursorcolumn:get() end, opts)
-
-vim.keymap.set("n", "<leader>cfp", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end, opts)
+vim.keymap.set("n", "<leader>cl", function() vim.opt.cursorline = not vim.opt.cursorline:get() end,
+	described(opts, "toggle cursor line"))
+vim.keymap.set("n", "<leader>cc", function() vim.opt.cursorcolumn = not vim.opt.cursorcolumn:get() end,
+	described(opts, "toggle cursor column"))
+vim.keymap.set("n", "<leader>cfp", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end,
+	described(opts, "copy file path"))

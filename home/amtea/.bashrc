@@ -36,7 +36,7 @@ export NVM_DIR="$HOME/.nvm"
 # nvm auto switch
 
 # opts
-export NVM_AUTO_SWITCH_QUIET=true  # true silent
+export NVM_AUTO_SWITCH_QUIET=true # true silent
 # export NVM_AUTO_INSTALL=true
 
 if [ -f "$HOME/.config/nvm/nvm-autoswitch.sh" ]; then
@@ -62,3 +62,11 @@ export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
 export ZK_NOTEBOOK_DIR="$HOME/Documents/zknotes"
 
 eval "$(zoxide init bash)"
+
+export PATH="$HOME/.local/bin:$PATH"
+
+HOST_COLOR='\[\e[38;5;12m\]'
+GREEN='\[\e[38;5;2m\]'
+RESET='\[\e[0m\]'
+
+export PS1="${HOST_COLOR}\u@\h${RESET}:${GREEN}\w${RESET}\$ "

@@ -5,6 +5,7 @@ nerd-fonts-noto-sans-mono
 org-freedesktop-filemanager1-common-git
 pass-secret-service-git
 podman-tui
+ps_mem
 sing-geoip-db
 sing-geosite-db
 stomptuner

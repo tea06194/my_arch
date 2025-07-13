@@ -31,7 +31,6 @@ jdk21-openjdk
 jmtpfs
 jq
 kitty
-lazygit
 lib32-nvidia-utils
 linux
 linux-firmware
@@ -61,6 +60,7 @@ pipewire-pulse
 podman
 podman-compose
 podman-tui
+ps_mem
 qbittorrent
 qt5-base
 qt6ct

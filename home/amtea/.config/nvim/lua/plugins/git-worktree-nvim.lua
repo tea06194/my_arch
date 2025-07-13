@@ -163,7 +163,7 @@ M.git_worktrees = function()
 	end
 
 	fzf.fzf_exec('git worktree list', {
-		prompt = 'Git Worktrees> ',
+		prompt = 'Git Worktrees (add: C-a, delete: C-d)> ',
 		previewer = false,
 		actions = {
 			['default'] = switch_worktree,
@@ -184,7 +184,7 @@ return {
 		},
 		config = function()
 			vim.keymap.set("n", "<leader>gw", M.git_worktrees,
-				{ desc = "Git worktrees (fzf)" })
+				{ desc = "git worktrees (fzf)" })
 
 			require("git-worktree").setup({
 				autopush = false,

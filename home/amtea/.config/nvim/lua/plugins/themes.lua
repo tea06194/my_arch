@@ -1,12 +1,14 @@
+local uv = vim.uv
+
 return {
 	{
 		'sainnhe/sonokai',
 		lazy = false,
 		priority = 1000,
 		config = function()
-			local theme_file = vim.fn.expand("~/.config/theme/current_theme")
-			local init_theme = vim.fn.filereadable(theme_file) == 1 and vim.fn.readfile(theme_file)[1] or "dark"
-			local theme = init_theme
+			local os_theme_file = vim.fn.expand("~/.config/theme/current_theme")
+			local theme = (vim.fn.filereadable(os_theme_file) == 1 and vim.fn.readfile(os_theme_file)[1]) or "dark"
+
 			local light = {
 				black = { "#181819", "255" },
 				bg_dim = { "#f8f8f8", "254" },
@@ -34,30 +36,33 @@ return {
 				none = { "NONE", "NONE" },
 			}
 
-			vim.keymap.set(
-				"n",
-				"<leader>lg",
-				function()
-					vim.g.sonokai_colors_override = light
-					theme = "light"
-					vim.cmd.colorscheme('sonokai')
-				end
-			)
-			vim.keymap.set(
-				"n",
-				"<leader>dr",
-				function()
+			local toggle = function(value)
+				if value == "dark" then
 					vim.g.sonokai_colors_override = {
 						none = { 'NONE', 'NONE' }
 					}
-					theme = "dark"
-					vim.cmd.colorscheme('sonokai')
+				else
+					vim.g.sonokai_colors_override = light
 				end
-			)
-			vim.g.sonokai_enable_italic = true
-			if init_theme == "light" then
-				vim.g.sonokai_colors_override = light
+				vim.cmd.colorscheme('sonokai')
 			end
+
+			local ev = uv.new_fs_event()
+
+			if ev ~= nil then
+				ev:start(os_theme_file, {}, vim.schedule_wrap(function(err)
+					if err then error(err) end
+					local new_val = vim.fn.readfile(os_theme_file)[1]
+					if new_val and new_val ~= theme then
+						theme = new_val
+						toggle(theme)
+					end
+				end))
+			end
+
+			vim.g.sonokai_enable_italic = true
+
+			toggle(theme)
 
 			vim.cmd.colorscheme('sonokai')
 
@@ -77,7 +82,7 @@ return {
 					})
 
 					if theme == "dark" then
-						vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#595f6f' })
+					  	vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#595f6f' })
 						vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbolOff', { fg = '#ff9900' })
 					else
 						vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { fg = '#d8d8d8' })

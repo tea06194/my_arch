@@ -57,7 +57,7 @@ return {
 				else
 					vim.lsp.buf.format({ bufnr = bufnr, async = false, timeout_ms = 10000 })
 				end
-			end, { desc = "Format: Prettier→LSP fallback" })
+			end, { desc = "format" })
 		end
 	}
 }

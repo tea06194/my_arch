@@ -1,4 +1,6 @@
 local opts = { noremap = true, silent = true }
+local M = require("config.functions.utils")
+local described = M.described
 
 -- SHELL --
 vim.opt.shell = '/bin/bash'
@@ -33,8 +35,8 @@ vim.keymap.set("n", "<Space>", "<Nop>", opts)
 -- LANG --
 vim.env.LANG = "en_US.UTF-8"
 
-vim.keymap.set('i', '<C-х>', '<C-[>', opts)
-vim.keymap.set('i', '<C-к>', '<C-r>', opts)
+vim.keymap.set('i', '<C-х>', '<C-[>', described(opts, "<C-[>"))
+vim.keymap.set('i', '<C-к>', '<C-r>', described(opts, "<C-r>"))
 -- vim.keymap.set('i', '<C-ц>', '<C-w>', opts)
 -- vim.keymap.set('i', '<C-щ>', '<C-o>', opts)
 

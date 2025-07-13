@@ -26,7 +26,7 @@ return {
 					end
 				end
 
-				return url
+				return "[code](" .. url .. ")"
 			end
 
 			-- Регистрируем VimL-обертку, вызывающую Lua-функцию
@@ -43,45 +43,45 @@ return {
 				"n",
 				"<leader>gg",
 				":Gedit :<CR>",
-				{ desc = "Open fugitive UI window", silent = true }
+				{ desc = "open fugitive UI window", silent = true }
 			)
 			vim.keymap.set(
 				"n",
 				"<leader>gl",
 				":Git log<cr>",
-				{ desc = "Open log" }
+				{ desc = "open log" }
 			)
 
 			vim.keymap.set(
 				"n",
 				"<leader>gps",
 				":Git push<CR>",
-				{ desc = "Pushes changes to remote" }
+				{ desc = "pushes changes to remote" }
 			)
 			vim.keymap.set(
 				"n",
 				"<leader>gpl",
 				":Git pull<CR>",
-				{ desc = "Pulls changes from remote" }
+				{ desc = "pulls changes from remote" }
 			)
 
 			vim.keymap.set(
 				"n",
 				"<leader>gy",
 				":.GBrowse!<cr>",
-				{ desc = "Copy link to current line" }
+				{ desc = "copy link to current line" }
 			)
 			vim.keymap.set(
 				"n",
 				"<leader>gY",
 				":GBrowse!<CR>",
-				{ desc = "Copy link to file" }
+				{ desc = "copy link to file" }
 			)
 			vim.keymap.set(
 				"x",
 				"<leader>gy",
 				":'<'>GBrowse!<cr>",
-				{ desc = "Copy link to current lines" }
+				{ desc = "copy link to current lines" }
 			)
 		end,
 	},

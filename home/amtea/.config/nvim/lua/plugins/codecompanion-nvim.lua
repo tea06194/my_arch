@@ -3,9 +3,9 @@ return {
 		"olimorris/codecompanion.nvim",
 		lazy = true,
 		keys = {
-			{ "<leader>Cc", "<cmd>CodeCompanionChat Toggle<CR>", desc = "Chat" },
-			{ "<leader>Ca", "<cmd>CodeCompanionActions<CR>",     desc = "AI Actions",        mode = { "n", "v" } },
-			{ "<leader>Cx", "<cmd>CodeCompanionCommand<CR>",     desc = "Generate Shell Cmd" },
+			{ "<leader>Cc", "<cmd>CodeCompanionChat Toggle<CR>", desc = "chat" },
+			{ "<leader>Ca", "<cmd>CodeCompanionActions<CR>",     desc = "ai actions",        mode = { "n", "v" } },
+			{ "<leader>Cx", "<cmd>CodeCompanionCommand<CR>",     desc = "generate shell cmd" },
 		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",

@@ -160,7 +160,7 @@ return {
 
 			vim.keymap.set("n", "<leader>fgs", function()
 				fzf.git_status()
-			end)
+			end, { desc= "git status"})
 
 			-- Zoxide
 
