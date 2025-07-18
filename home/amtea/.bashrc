@@ -66,7 +66,16 @@ eval "$(zoxide init bash)"
 export PATH="$HOME/.local/bin:$PATH"
 
 HOST_COLOR='\[\e[38;5;12m\]'
+BRANCH_COLOR='\[\e[38;5;208m\]'
 GREEN='\[\e[38;5;2m\]'
 RESET='\[\e[0m\]'
 
-export PS1="${HOST_COLOR}\u@\h${RESET}:${GREEN}\w${RESET}\$ "
+parse_git_branch() {
+	git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+export PS1="${HOST_COLOR}\u@\h${RESET}:${GREEN}\w${RESET}${BRANCH_COLOR}\$(parse_git_branch)${RESET}\$ "
+
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+	. /usr/share/bash-completion/bash_completion
+fi

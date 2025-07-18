@@ -4,6 +4,7 @@ ardour
 audacious
 base
 base-devel
+bash-completion
 code
 cpr
 docker

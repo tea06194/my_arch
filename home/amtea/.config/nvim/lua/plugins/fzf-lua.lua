@@ -30,6 +30,10 @@ return {
 						},
 					},
 				},
+				winopts = {
+					width = 1,
+					height = 0.9
+				},
 				zoxide = {
 					prompt_title = 'Zoxide',
 					actions = {
@@ -77,11 +81,30 @@ return {
 				fzf.files()
 			end, { desc = "find files" })
 
+			vim.keymap.set("v", "<leader>ff", function()
+				local input = fzf_utils.get_visual_selection()
+				fzf.files({
+					fzf_opts = {
+						['--query'] = input,
+					}
+				})
+			end, { desc = "find files for selection" })
+
 			vim.keymap.set("n", "<leader>fF", function()
 				fzf.files {
 					cwd = strip_oil_prefix(vim.fn.expand "%:p:h"),
 				}
 			end, { desc = "find files in current dir" })
+
+			vim.keymap.set("v", "<leader>fF", function()
+				local input = fzf_utils.get_visual_selection()
+				fzf.files {
+					cwd = strip_oil_prefix(vim.fn.expand "%:p:h"),
+					fzf_opts = {
+						['--query'] = input,
+					}
+				}
+			end, { desc = "find files in current dir for selection" })
 
 			vim.keymap.set("n", "<leader>fg", function()
 				fzf.live_grep()
@@ -160,7 +183,7 @@ return {
 
 			vim.keymap.set("n", "<leader>fgs", function()
 				fzf.git_status()
-			end, { desc= "git status"})
+			end, { desc = "git status" })
 
 			-- Zoxide
 

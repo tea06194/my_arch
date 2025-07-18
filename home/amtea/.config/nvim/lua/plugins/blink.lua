@@ -25,6 +25,22 @@ return {
 									fill = true,
 									max = 60,
 								},
+							},
+							label = {
+								width = { fill = true, max = 100 },
+								text = function(ctx)
+									local label = ctx.label or ''
+									local max_width = 100
+									local label_width = vim.fn.strdisplaywidth(label)
+
+									if label_width > max_width then
+										local start = label_width - max_width + 1
+										label = vim.fn.strcharpart(label, start, max_width)
+										label = '…' .. label
+									end
+
+									return label
+								end
 							}
 						}
 					}
@@ -72,6 +88,9 @@ return {
 							-- enable for inputs as well, with:
 							-- or vim.fn.getcmdtype() == '@'
 						end,
+						draw = {
+							columns = { { 'kind_icon' }, { 'label', gap = 1 } },
+						}
 					}
 				},
 				keymap = {

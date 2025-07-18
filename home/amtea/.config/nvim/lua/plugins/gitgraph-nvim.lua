@@ -1,6 +1,7 @@
 return {
 	{
-		'isakbm/gitgraph.nvim',
+		'tea06194/gitgraph.nvim',
+		branch = "dual-mode",
 		opts = {
 			git_cmd = "git",
 			symbols = {
@@ -57,7 +58,8 @@ return {
 			{
 				"<leader>gpd",
 				function()
-					require('gitgraph').draw_dual({ commit_info_as_branch_color=true }, { all = true, max_count = 1000 })
+					require('gitgraph').draw_dual({ commit_info_as_branch_color = true },
+						{ all = true, max_count = 1000 })
 				end,
 				desc = "graph dual",
 			},

@@ -19,6 +19,44 @@ return {
 				red = '#ec5f67'
 			}
 
+			local function git_aware_filename()
+				local fullpath = vim.fn.expand('%:p')
+
+				-- Если это не Git diff view, возвращаем nil для использования встроенного "filename"
+				if not fullpath:match('diffview://') then
+					return nil
+				end
+
+				-- Git diff view логика - возвращаем только filename
+				return vim.fn.expand('%:t')
+			end
+
+			local function git_stage_info()
+				local fullpath = vim.fn.expand('%:p')
+
+				if not fullpath:match('diffview://') then
+					return nil
+				end
+
+				local stage = fullpath:match(':(%d+):')
+				if stage then
+					local stage_names = {
+						['0'] = 'result',
+						['1'] = '$orig',
+						['2'] = 'HEAD',
+						['3'] = 'MERGE_HEAD'
+					}
+					return stage_names[stage]
+				end
+
+				local sha = fullpath:match('/%.git/([a-f0-9]+)/')
+				if sha then
+					return sha:sub(1, 7)
+				end
+
+				return nil
+			end
+
 			require('lualine').setup({
 				options = {
 					always_show_tabline = false,
@@ -99,9 +137,29 @@ return {
 				winbar = {
 					lualine_a = {
 						{
-							"filename",
-							path = 3,
-							shorting_target = 10,
+							function()
+								local git_result = git_aware_filename()
+								if git_result then
+									return git_result
+								else
+									return require('lualine.components.filename'):new({
+										path = 3,
+										shorting_target = 10,
+									}):update_status()
+								end
+							end,
+							separator = '',
+							color = function()
+								return vim.bo.modified and { fg = "#e61616" } or nil
+							end
+						},
+						{
+							git_stage_info,
+							separator = '',
+							color = { gui = 'bold' },
+							cond = function()
+								return git_stage_info() ~= nil
+							end
 						}
 					},
 					lualine_z = {
