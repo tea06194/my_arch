@@ -97,6 +97,9 @@ vim.keymap.set(
 -- EDIT --
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', described({ noremap = true, silent = true }, "yank to clipboard"))
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', described({ noremap = true, silent = true }, "paste from clipboard"))
+
+vim.keymap.set('n', '<leader>MY', '"ayy', described({ noremap = true, silent = true }, "clear and add string to @a"))
+vim.keymap.set('n', '<leader>my', '"Ayy', described({ noremap = true, silent = true }, "add string to @a"))
 -- Move current line(s) ---
 vim.keymap.set("n", "<leader>j", ":m .+1<CR>==", described(opts, "move line down"))
 vim.keymap.set("n", "<leader>k", ":m .-2<CR>==", described(opts, "move line up"))

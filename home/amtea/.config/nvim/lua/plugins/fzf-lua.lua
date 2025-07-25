@@ -20,7 +20,7 @@ return {
 			local fzf_utils = require "fzf-lua.utils"
 			local fzf_path = require "fzf-lua.path"
 
-			fzf.setup {
+			local config = {
 				git = {
 					branches = {
 						actions = {
@@ -29,10 +29,18 @@ return {
 							end,
 						},
 					},
+					blame = {
+						winopts = {
+							preview = {
+								layout = "vertical",
+								vertical = "down:60%"
+							}
+						}
+					},
 				},
 				winopts = {
 					width = 1,
-					height = 0.9
+					height = 0.9,
 				},
 				zoxide = {
 					prompt_title = 'Zoxide',
@@ -70,6 +78,8 @@ return {
 					},
 				},
 			}
+
+			fzf.setup(config)
 
 			fzf.register_ui_select()
 
