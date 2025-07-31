@@ -42,15 +42,15 @@
 		"max-length": 9,
 		"min-length": 9
 	},
-	"custom/vpn": {
-		"format": "{text}",
-		"exec": "~/.config/waybar/openvpn-status.sh",
-		"on-click": "~/.config/waybar/openvpn-toggle.sh",
-		"interval": 5,
-		"tooltip": true,
-		"return-type": "json",
-		"signal": 10
-	},
+	// "custom/vpn": {
+	// 	"format": "{text}",
+	// 	"exec": "~/.config/waybar/openvpn-status.sh",
+	// 	"on-click": "~/.config/waybar/openvpn-toggle.sh",
+	// 	"interval": 5,
+	// 	"tooltip": true,
+	// 	"return-type": "json",
+	// 	"signal": 10
+	// },
 	"custom/gpu": {
 		"format": "{}",
 		"exec": "~/.config/waybar/gp.sh",

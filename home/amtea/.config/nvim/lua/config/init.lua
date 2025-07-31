@@ -3,8 +3,7 @@ local M = require("config.functions.utils")
 local described = M.described
 
 -- SHELL --
-vim.opt.shell = '/bin/bash'
-vim.opt.shellcmdflag = '-i -c'
+vim.opt.shell = '/usr/bin/zsh'
 
 -- ENV --
 vim.env.NVIM_CFG = vim.fn.stdpath("config")

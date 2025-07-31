@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+# Вместо встроенного eslint всегда запускаем eslint_d
+exec eslint_d "$@"

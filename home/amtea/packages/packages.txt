@@ -4,7 +4,7 @@ ardour
 audacious
 base
 base-devel
-bash-completion
+blender
 code
 cpr
 docker
@@ -33,6 +33,7 @@ jmtpfs
 jq
 kitty
 lib32-nvidia-utils
+libxml2-legacy
 linux
 linux-firmware
 linux-headers
@@ -96,3 +97,4 @@ zed
 zk
 zoom
 zoxide
+zsh

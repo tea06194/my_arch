@@ -22,7 +22,21 @@ return {
 					json            = { "prettier", lsp_format = "fallback" },
 					css             = { "stylelint", lsp_format = "fallback" },
 					scss            = { "stylelint", lsp_format = "fallback" },
-					markdown        = { "mdformat", lsp_format = "fallback" }
+					markdown        = { "mdformat", lsp_format = "fallback" },
+
+					sh              = { "beautysh", lsp_format = "fallback" },
+					bash            = { "beautysh", lsp_format = "fallback" },
+					zsh             = { "beautysh", lsp_format = "fallback" }
+				},
+
+				formatters = {
+					beautysh = {
+						prepend_args = {
+							"--indent-size", "4",
+							"--tab",
+							"--force-function-style", "paronly",
+						},
+					},
 				},
 			})
 
@@ -41,12 +55,18 @@ return {
 					css             = true,
 					scss            = true,
 					markdown        = true,
+
+					sh              = true,
+					bash            = true,
+					zsh             = true,
 				}
 
 				local use_conform = conform_fts[ft] and (
 					(ft ~= "css" and ft ~= "scss" and has_prettier_config(bufnr))
-					-- для css/scss всегда можно
+
 					or ft == "css" or ft == "scss" or "markdown"
+
+					or ft == "sh" or ft == "bash" or ft == "zsh"
 				)
 
 				if use_conform then

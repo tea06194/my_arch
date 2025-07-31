@@ -55,10 +55,6 @@ vpn() {
 	$command "$@"
 }
 
-export ANDROID_HOME=/opt/android-sdk
-export PATH=$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-export ANDROID_AVD_HOME="$HOME/.config/.android/avd"
-
 export ZK_NOTEBOOK_DIR="$HOME/Documents/zknotes"
 
 eval "$(zoxide init bash)"
@@ -75,7 +71,3 @@ parse_git_branch() {
 }
 
 export PS1="${HOST_COLOR}\u@\h${RESET}:${GREEN}\w${RESET}${BRANCH_COLOR}\$(parse_git_branch)${RESET}\$ "
-
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-	. /usr/share/bash-completion/bash_completion
-fi

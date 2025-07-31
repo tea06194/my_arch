@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 # Read last theme (light or dark)
 THEME=$(<~/.config/theme/current_theme)

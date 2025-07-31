@@ -87,6 +87,13 @@ return {
 				}
 			)
 
+
+			vim.lsp.config("bashls", {
+				filetypes = {
+					"sh", "zsh"
+				}
+			})
+
 			vim.lsp.config("lua_ls", {
 				root_markers = {
 					"init.lua",

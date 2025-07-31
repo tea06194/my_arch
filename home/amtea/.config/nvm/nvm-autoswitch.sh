@@ -1,68 +1,63 @@
-#!/bin/bash
-# nvm-autoswitch.sh
+#!/bin/zsh
+# Modern nvm-autoswitch.sh with enhanced zsh integration
 
-# Opts (can switch in .bashrc)
-export NVM_AUTO_SWITCH_QUIET=${NVM_AUTO_SWITCH_QUIET:-false} # true - silent mode
+# Configuration options (can be set in .zshrc)
+export NVM_AUTO_SWITCH_QUIET=${NVM_AUTO_SWITCH_QUIET:-false}
 export NVM_AUTO_INSTALL=${NVM_AUTO_INSTALL:-true}
 
-auto_switch_node() {
-	# nvm is availible
-	if ! command -v nvm &>/dev/null; then
-		return 0
-	fi
+# Enable extended globbing for better pattern matching
+setopt EXTENDED_GLOB
 
-	local node_version="$(nvm version)"
-	local nvm_path="$(nvm_find_up .nvmrc | command tr -d '\n')"
+# Logging function with emoji support
+log() {
+	[[ "$NVM_AUTO_SWITCH_QUIET" != "true" ]] && builtin print -r -- "$@"
+}
 
-	if [ -n "$nvm_path" ]; then
-		# .nvmrc exist
-		local nvm_version=$(<"${nvm_path}/.nvmrc")
-
-		if [ "$nvm_version" = "N/A" ]; then
-			# Not installed
-			if [ "$NVM_AUTO_INSTALL" = "true" ]; then
-				[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "📦 Installing Node.js version from .nvmrc..."
-				nvm install
-			else
-				[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "⚠️  Node.js version $(cat "${nvm_path}") not installed. Run 'nvm install' to install it."
-			fi
-		elif [ "$nvm_version" != "$node_version" ]; then
-			[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "🔄 Switching to Node.js $(cat "${nvm_path}")"
-			nvm use "$nvm_version"
-		fi
-	else
-		# .nvmrc not exist - use default
-		local default_version="$(nvm version default)"
-
-		if [ "$default_version" = "N/A" ]; then
-			# No default version - install last LTS
-			[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "⚠️  No default Node.js version set. Setting latest LTS as default..."
-			nvm alias default lts/*
-			default_version="$(nvm version default)"
-		fi
-
-		if [ "$node_version" != "$default_version" ]; then
-			[ "$NVM_AUTO_SWITCH_QUIET" != "true" ] && echo "🏠 Switching to default Node.js version"
-			nvm use default
+# Load nvm if not already loaded
+_load_nvm() {
+	if ! typeset -f nvm &>/dev/null; then
+		if [[ -s "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ]]; then
+			# shellcheck source=/dev/null
+			. "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
 		fi
 	fi
 }
 
-# cd alias
-cd() {
-	builtin cd "$@"
+# Main function: detect .nvmrc and switch or install as needed
+auto_switch_node() {
+	_load_nvm
+	local nvmrc_file version
+	nvmrc_file=$(printf "%s/.nvmrc" "$PWD")
+	if [[ -f $nvmrc_file ]]; then
+		version=$(<"$nvmrc_file")
+		if [[ $(nvm version) != "v$version" ]]; then
+			if nvm ls "$version" &>/dev/null; then
+				log "🔄 Switching to Node.js $version"
+				nvm use "$version"
+			elif [[ "$NVM_AUTO_INSTALL" == "true" ]]; then
+				log "⬇️ Installing Node.js $version"
+				nvm install "$version" && nvm use "$version"
+			else
+				log "⚠️ Node.js $version not installed"
+			fi
+		fi
+	fi
+}
+
+# Hook into directory changes and prompt to auto-switch
+autoload -U add-zsh-hook
+add-zsh-hook chpwd auto_switch_node
+add-zsh-hook precmd auto_switch_node
+
+# Preserve fasd integration if present
+if (( $+commands[fasd] )); then
+	fasd_cd() {
+		fasd "$@" && auto_switch_node
+	}
+	alias z=fasd_cd
+fi
+
+# Function to manually trigger nvm autoswitch
+nvm-autoswitch() {
 	auto_switch_node
 }
-
-# zoxide integration
-if command -v zoxide &>/dev/null; then
-	z() {
-		__zoxide_z "$@"
-		auto_switch_node
-	}
-
-	zi() {
-		__zoxide_zi "$@"
-		auto_switch_node
-	}
-fi

@@ -1,39 +1,36 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
+setopt errexit nounset pipefail
 
-CURRENT=$(gsettings get org.gnome.desktop.interface color-scheme)
-if [[ "$CURRENT" == "'prefer-dark'" ]]; then
-  NEW="light"
-else
-  NEW="dark"
-fi
+toggle_theme() {
+	local raw current next
+	raw=$(gsettings get org.gnome.desktop.interface color-scheme)
+	current=${raw//\'/}
 
-if [[ "$NEW" == "dark" ]]; then
-  gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
-  gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
-else
-  gsettings set org.gnome.desktop.interface color-scheme "prefer-light"
-  gsettings set org.gnome.desktop.interface gtk-theme "Adwaita"
-fi
+	case $current in
+		prefer-dark) next=prefer-light ;;
+		prefer-light) next=prefer-dark ;;
+		*)
+			next=prefer-dark
+			f
+			;;
+	esac
 
-# QT
-QT6CT_CONF="$HOME/.config/qt6ct/qt6ct.conf"
-QT_LIGHT_SCHEME="/usr/share/qt6ct/colors/simple.conf"
-QT_DARK_SCHEME="/usr/share/qt6ct/colors/darker.conf"
-if [[ -f "$QT6CT_CONF" ]]; then
-  sed -i -E \
-    -e "s|^color_scheme_path=.*|color_scheme_path=$([[ \"$NEW\" == \"dark\" ]] && echo \"$QT_DARK_SCHEME\" || echo \"$QT_LIGHT_SCHEME\")|" \
-    "$QT6CT_CONF"
-fi
+	gsettings set org.gnome.desktop.interface color-scheme "$next"
+	gsettings set org.gnome.desktop.interface gtk-theme "${next/#prefer-/}"
 
-# Ardour
-ARDOUR_UI="$HOME/.config/ardour8/ui_config"
-if [[ -f "$ARDOUR_UI" ]]; then
-  sed -i -E \
-    -e "s|(Option name=\"color-file\" value=\")[^\"]*(\")|\1$([[ \"$NEW\" == \"dark\" ]] && echo dark || echo captain_light)\2|" \
-    "$ARDOUR_UI"
-fi
+	qt_conf="$HOME/.config/qt6ct/qt6ct.conf"
+	[[ -f $qt_conf ]] && sed -i \
+		-E "s|^color_scheme_path=.*|color_scheme_path=${next/#prefer-/}.conf|" \
+		"$qt_conf"
 
-hyprctl notify 5 3000 "rgb(ff1ea3)" "🌗_$NEW"
+	ardour_ui="$HOME/.config/ardour8/ui_config"
+	[[ -f $ardour_ui ]] && sed -i \
+		-E "s|(Option name=\"color-file\" value=\")[^\"]*(\")|\1${next/#prefer-/}\2|" \
+		"$ardour_ui"
 
-echo "$NEW" > ~/.config/theme/current_theme
+	hyprctl notify 5 3000 "rgb(ff1ea3)" "🌗  ${next/#prefer-/}"
 
+	printf '%s' "${next/#prefer-/}" >~/.config/theme/current_theme
+}
+
+toggle_theme
