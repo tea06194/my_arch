@@ -13,6 +13,7 @@ expac
 fd
 firefox
 foot
+freerdp
 fzf
 gdb
 git
@@ -68,6 +69,7 @@ qt5-base
 qt6ct
 racket
 reflector
+remmina
 ripgrep
 sing-geoip-db
 sing-geosite-db
@@ -88,6 +90,7 @@ waybar
 waybar-updates
 wget
 wl-clipboard
+wtype
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xorg-xwayland

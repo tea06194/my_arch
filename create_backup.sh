@@ -93,7 +93,6 @@ done
 
 # Копируем отдельные конфигурационные файлы
 typeset -a config_files=(
-	"pwr.sh"
 	"mimeapps.list"
 )
 
